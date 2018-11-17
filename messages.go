@@ -49,7 +49,7 @@ type MessageHeader struct {
 	Build     BuildVersion `json:"build"`
 }
 
-func getHostName() string {
+func GetHostName() string {
 	host := os.Getenv("DOCKER_HOST_IP")
 	if len(host) == 0 {
 		host, _ = os.Hostname()
@@ -58,8 +58,8 @@ func getHostName() string {
 	return host
 }
 
-//noinspection GoUnusedFunction
-func createHeader(status int, location string) MessageHeader {
+//noinspection GoUnusedExportedFunction
+func CreateHeader(status int, location string) MessageHeader {
 
 	// Do we have a build version?
 	//
@@ -75,7 +75,7 @@ func createHeader(status int, location string) MessageHeader {
 		Status:    status,
 		Location:  location,
 		TimeStamp: time.Now(),
-		Host:      getHostName(),
+		Host:      GetHostName(),
 		Build:     build,
 	}
 }
