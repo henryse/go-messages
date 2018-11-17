@@ -64,6 +64,14 @@ type AlertMessage struct {
 	Source  string        `json:"source"`
 }
 
+func (a *AlertMessage) GetSource() string {
+	if len(a.Source) == 0 {
+		return "unknown"
+	}
+
+	return a.Source
+}
+
 type ErrorMessage struct {
 	Header  MessageHeader `json:"header"`
 	Message string        `json:"message"`
