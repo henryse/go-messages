@@ -34,22 +34,22 @@ import (
 )
 
 type BuildVersion struct {
-	Version   string                 	`json:"version"`
-	BuildTime string                 	`json:"build_time"`
-	Image     string                 	`json:"image"`
-	ImageID   string                 	`json:"image_id"`
-	Versions  map[string]interface{} 	`json:"versions"`
+	Version   string                 `json:"version"`
+	BuildTime string                 `json:"build_time"`
+	Image     string                 `json:"image"`
+	ImageID   string                 `json:"image_id"`
+	Versions  map[string]interface{} `json:"versions"`
 }
 
 type MessageHeader struct {
-	Status    int          				`json:"status"`
-	Location  string       				`json:"location"`
-	TimeStamp time.Time    				`json:"timestamp"`
-	Host      string       				`json:"host"`
-	Build     BuildVersion 				`json:"build"`
+	Status    int          `json:"status"`
+	Location  string       `json:"location"`
+	TimeStamp time.Time    `json:"timestamp"`
+	Host      string       `json:"host"`
+	Build     BuildVersion `json:"build"`
 }
 
-func (mh *MessageHeader) getHostName() string {
+func (mh MessageHeader) getHostName() string {
 	host := os.Getenv("DOCKER_HOST_IP")
 	if len(host) == 0 {
 		host, _ = os.Hostname()
@@ -58,7 +58,7 @@ func (mh *MessageHeader) getHostName() string {
 	return host
 }
 
-func (mh *MessageHeader) createHeader(status int, location string) MessageHeader {
+func (mh MessageHeader) createHeader(status int, location string) MessageHeader {
 
 	// Do we have a build version?
 	//
@@ -95,5 +95,3 @@ type TemperatureMessage struct {
 	Humidity   float32       `json:"humidity"`
 	Fahrenheit float32       `json:"fahrenheit"`
 }
-
-
