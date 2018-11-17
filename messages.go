@@ -58,6 +58,28 @@ func GetHostName() string {
 	return host
 }
 
+type AlertMessage struct {
+	Header  MessageHeader `json:"header"`
+	Message string        `json:"message"`
+	Source  string        `json:"source"`
+}
+
+type ErrorMessage struct {
+	Header  MessageHeader `json:"header"`
+	Message string        `json:"message"`
+}
+
+type MotionMessage struct {
+	Header MessageHeader `json:"header"`
+}
+
+type TemperatureMessage struct {
+	Header     MessageHeader `json:"header"`
+	Celsius    float32       `json:"celsius"`
+	Humidity   float32       `json:"humidity"`
+	Fahrenheit float32       `json:"fahrenheit"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
@@ -78,21 +100,4 @@ func CreateHeader(status int, location string) MessageHeader {
 		Host:      GetHostName(),
 		Build:     build,
 	}
-}
-
-type AlertMessage struct {
-	Header  MessageHeader `json:"header"`
-	Message string        `json:"message"`
-	Source  string        `json:"source"`
-}
-
-type MotionMessage struct {
-	Header MessageHeader `json:"header"`
-}
-
-type TemperatureMessage struct {
-	Header     MessageHeader `json:"header"`
-	Celsius    float32       `json:"celsius"`
-	Humidity   float32       `json:"humidity"`
-	Fahrenheit float32       `json:"fahrenheit"`
 }
