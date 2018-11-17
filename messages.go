@@ -58,6 +58,7 @@ func getHostName() string {
 	return host
 }
 
+//noinspection GoUnusedFunction
 func createHeader(status int, location string) MessageHeader {
 
 	// Do we have a build version?
