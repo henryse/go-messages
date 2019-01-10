@@ -106,17 +106,21 @@ type SystemStatusMessage struct {
 	SystemStatus SystemStatusMap `json:"message"`
 }
 
-type DeviceStatus int
+type DeviceState int
 
 const (
-	ON  DeviceStatus = 0
-	OFF DeviceStatus = 1
+	ON  DeviceState = 0
+	OFF DeviceState = 1
 )
 
-type DeviceStatusMap map[string]DeviceStatus
+type DeviceInfo struct {
+	Hardware string      `json:"hardware"`
+	State    DeviceState `json:"state"`
+}
+type DeviceInfoMap map[string]DeviceInfo
 type DeviceStatusMessage struct {
-	Header       MessageHeader   `json:"header"`
-	DeviceStatus DeviceStatusMap `json:"message"`
+	Header  MessageHeader `json:"header"`
+	Devices DeviceInfoMap `json:"devices"`
 }
 
 //noinspection GoUnusedExportedFunction
