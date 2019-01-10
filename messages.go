@@ -110,8 +110,9 @@ type SystemStatusMessage struct {
 type DeviceState string
 
 const (
-	ON  DeviceState = "ON"
-	OFF DeviceState = "OFF"
+	ON      DeviceState = "ON"
+	OFF     DeviceState = "OFF"
+	UNKNOWN DeviceState = "UNKNOWN"
 )
 
 type LocationName string
