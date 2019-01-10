@@ -94,12 +94,25 @@ type SuccessMessage struct {
 	Message string        `json:"message"`
 }
 
-type SystemStatus int
+type SystemStatus string
 
 const (
-	DOWN SystemStatus = 0
-	UP   SystemStatus = 1
+	DOWN      SystemStatus = "DOWN"
+	UP        SystemStatus = "UP"
+	UNDEFINED SystemStatus = "UNDEFINED"
 )
+
+//noinspection GoUnusedExportedFunction
+func ParseSystemState(state string) SystemStatus {
+	state = strings.ToUpper(state)
+	switch state {
+	case "DOWN":
+		return DOWN
+	case "UP":
+		return UP
+	}
+	return UNDEFINED
+}
 
 // SystemStatusMap[system]
 type SystemStatusMap map[string]SystemStatus
