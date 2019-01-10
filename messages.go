@@ -107,11 +107,11 @@ type SystemStatusMessage struct {
 	SystemStatus SystemStatusMap `json:"message"`
 }
 
-type DeviceState int
+type DeviceState string
 
 const (
-	ON  DeviceState = 0
-	OFF DeviceState = 1
+	ON  DeviceState = "ON"
+	OFF DeviceState = "OFF"
 )
 
 type LocationName string
