@@ -30,6 +30,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -117,6 +118,7 @@ const (
 
 //noinspection GoUnusedExportedFunction
 func ParseDeviceState(state string) DeviceState {
+	state = strings.ToUpper(state)
 	switch state {
 	case "ON":
 		return ON
