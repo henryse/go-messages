@@ -115,6 +115,17 @@ const (
 	UNKNOWN DeviceState = "UNKNOWN"
 )
 
+//noinspection GoUnusedExportedFunction
+func ParseDeviceState(state string) DeviceState {
+	switch state {
+	case "ON":
+		return ON
+	case "OFF":
+		return OFF
+	}
+	return UNKNOWN
+}
+
 type LocationName string
 type DeviceInfo struct {
 	Device string      `json:"device"`
