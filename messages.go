@@ -88,6 +88,25 @@ type TemperatureMessage struct {
 	Fahrenheit float32       `json:"fahrenheit"`
 }
 
+type SuccessMessage struct {
+	Header  MessageHeader `json:"header"`
+	Message string        `json:"message"`
+}
+
+type SystemStatus int
+
+const (
+	DOWN SystemStatus = 0
+	UP   SystemStatus = 1
+)
+
+type SystemStatusMap map[string]SystemStatus
+
+type StatusMessage struct {
+	Header       MessageHeader   `json:"header"`
+	SystemStatus SystemStatusMap `json:"message"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
