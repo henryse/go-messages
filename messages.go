@@ -97,8 +97,8 @@ type SuccessMessage struct {
 type SystemStatus string
 
 const (
-	DOWN      SystemStatus = "DOWN"
-	UP        SystemStatus = "UP"
+	ONLINE    SystemStatus = "ONLINE"
+	OFFLINE   SystemStatus = "OFFLINE"
 	UNDEFINED SystemStatus = "UNDEFINED"
 )
 
@@ -106,10 +106,10 @@ const (
 func ParseSystemState(state string) SystemStatus {
 	state = strings.ToUpper(state)
 	switch state {
-	case "DOWN":
-		return DOWN
-	case "UP":
-		return UP
+	case "ONLINE":
+		return ONLINE
+	case "OFFLINE":
+		return OFFLINE
 	}
 	return UNDEFINED
 }
