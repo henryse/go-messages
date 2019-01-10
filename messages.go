@@ -102,7 +102,7 @@ const (
 
 type SystemStatusMap map[string]SystemStatus
 
-type StatusMessage struct {
+type SystemStatusMessage struct {
 	Header       MessageHeader   `json:"header"`
 	SystemStatus SystemStatusMap `json:"message"`
 }
