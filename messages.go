@@ -118,7 +118,7 @@ type DeviceInfo struct {
 	State    DeviceState `json:"state"`
 }
 type DeviceInfoMap map[string]DeviceInfo
-type DeviceStatusMessage struct {
+type DevicesInfoMessage struct {
 	Header  MessageHeader `json:"header"`
 	Devices DeviceInfoMap `json:"devices"`
 }
