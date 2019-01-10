@@ -100,8 +100,8 @@ const (
 	UP   SystemStatus = 1
 )
 
-type SystemName string
-type SystemStatusMap map[SystemName]SystemStatus
+// SystemStatusMap[system]
+type SystemStatusMap map[string]SystemStatus
 type SystemStatusMessage struct {
 	Header       MessageHeader   `json:"header"`
 	SystemStatus SystemStatusMap `json:"message"`
@@ -119,7 +119,9 @@ type DeviceInfo struct {
 	Device string      `json:"device"`
 	State  DeviceState `json:"state"`
 }
-type DeviceInfoMap map[LocationName]DeviceInfo
+
+// DeviceInfoMap[location]
+type DeviceInfoMap map[string]DeviceInfo
 type DevicesInfoMessage struct {
 	Header  MessageHeader `json:"header"`
 	Devices DeviceInfoMap `json:"devices"`
