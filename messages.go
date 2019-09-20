@@ -94,6 +94,24 @@ type SuccessMessage struct {
 	Message string        `json:"message"`
 }
 
+type AlarmMessage struct {
+	Header MessageHeader `json:"header"`
+}
+
+type AlarmSensor struct {
+	Status string `json:"status"`
+	Number string `json:"number"`
+	Name   string `json:"name"`
+	Stamp  int64  `json:"stamp"`
+}
+
+type AlarmSensors map[string]AlarmSensor
+
+type AlarmSensorMessage struct {
+	Header       MessageHeader `json:"header"`
+	AlarmSensors AlarmSensors  `json:"sensors"`
+}
+
 type SystemStatus string
 
 const (
