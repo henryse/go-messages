@@ -116,6 +116,7 @@ type AlarmSensorsMessage struct {
 type AlarmSensorMessage struct {
 	Header      MessageHeader `json:"header"`
 	AlarmSensor AlarmSensor   `json:"sensor"`
+	Armed       bool          `json:"armed"`
 }
 
 type SystemStatus string
