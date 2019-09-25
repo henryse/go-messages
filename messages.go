@@ -107,10 +107,15 @@ type AlarmSensor struct {
 
 type AlarmSensors map[string]AlarmSensor
 
-type AlarmSensorMessage struct {
+type AlarmSensorsMessage struct {
 	Header       MessageHeader `json:"header"`
 	AlarmSensors AlarmSensors  `json:"sensors"`
 	Armed        bool          `json:"armed"`
+}
+
+type AlarmSensorMessage struct {
+	Header      MessageHeader `json:"header"`
+	AlarmSensor AlarmSensor   `json:"sensor"`
 }
 
 type SystemStatus string
