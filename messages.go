@@ -99,11 +99,11 @@ type AlarmMessage struct {
 }
 
 type AlarmSensor struct {
-	Id     string `json:"id"`
 	Status string `json:"status"`
 	Number string `json:"number"`
 	Name   string `json:"name"`
 	Stamp  int64  `json:"stamp"`
+	Id     string `json:"id"`
 }
 
 type AlarmSensors map[string]AlarmSensor
