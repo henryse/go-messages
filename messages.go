@@ -99,6 +99,7 @@ type AlarmMessage struct {
 }
 
 type AlarmSensor struct {
+	Id     string `json:"id"`
 	Status string `json:"status"`
 	Number string `json:"number"`
 	Name   string `json:"name"`
