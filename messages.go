@@ -1,5 +1,5 @@
 // **********************************************************************
-//    Copyright (c) 2018 Henry Seurer
+//    Copyright (c) 2018-2019 Henry Seurer
 //
 //   Permission is hereby granted, free of charge, to any person
 //    obtaining a copy of this software and associated documentation
@@ -178,6 +178,59 @@ type DeviceInfoMap map[string]DeviceInfo
 type DevicesInfoMessage struct {
 	Header  MessageHeader `json:"header"`
 	Devices DeviceInfoMap `json:"devices"`
+}
+
+// UPS
+type UPSBattery struct {
+	Charge         int     `json:"charge"`
+	ChargeLow      int     `json:"charge_low"`
+	ChargeWarning  int     `json:"charge_warning"`
+	Runtime        int     `json:"runtime"`
+	RuntimeLow     int     `json:"runtime_low"`
+	Type           string  `json:"type"`
+	Voltage        float32 `json:"voltage"`
+	VoltageNominal float32 `json:"voltage_nominal"`
+}
+
+type UPSDriver struct {
+	Name            string `json:"name"`
+	PollFreq        int    `json:"poll_freq"`
+	PollInterval    int    `json:"poll_interval"`
+	Port            string `json:"port"`
+	Synchronous     bool   `json:"synchronous"`
+	Version         string `json:"version"`
+	VersionData     string `json:"version_data"`
+	VersionInternal string `json:"version_internal"`
+}
+
+type UPSStatus struct {
+	Battery             UPSBattery `json:"battery"`
+	DeviceMfr           string     `json:"device_mfr"`
+	DeviceModel         string     `json:"device_model"`
+	DeviceType          string     `json:"device_type"`
+	InputTransferHigh   int        `json:"input_transfer_high"`
+	InputTransferLow    int        `json:"input_transfer_low"`
+	InputVoltage        float32    `json:"input_voltage"`
+	InputVoltageNominal float32    `json:"input_voltage_nominal"`
+	OutputVoltage       float32    `json:"output_voltage"`
+	BeeperStatus        bool       `json:"beeper_status"`
+	DelayShutdown       int        `json:"delay_shutdown"`
+	DelayStart          int        `json:"delay_start"`
+	Load                int        `json:"load"`
+	Mfr                 string     `json:"mfr"`
+	Model               string     `json:"model"`
+	ProductId           string     `json:"product_id"`
+	RealPowerNominal    int        `json:"real_power_nominal"`
+	Status              string     `json:"status"`
+	TestResult          string     `json:"test_result"`
+	TimerShutdown       int        `json:"timer_shutdown"`
+	TimerStart          int        `json:"timer_start"`
+	VendorId            string     `json:"vendor_id"`
+}
+
+type UPSStatusMessage struct {
+	Header MessageHeader `json:"header"`
+	Status UPSStatus     `json:"status"`
 }
 
 //noinspection GoUnusedExportedFunction
