@@ -218,7 +218,7 @@ func (t *ThrottleEntry) Copy() *ThrottleEntry {
 	}
 }
 
-type ThrottleEntries map[string]ThrottleEntry
+type ThrottleEntries []ThrottleEntry
 
 type ThrottleEntriesMessage struct {
 	Header          MessageHeader   `json:"header"`
