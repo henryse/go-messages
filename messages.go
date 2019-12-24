@@ -29,8 +29,11 @@ package messages
 import (
 	"encoding/json"
 	"io/ioutil"
+	"math"
+	"math/rand"
 	"os"
 	"strings"
+	"sync/atomic"
 	"time"
 )
 
@@ -118,6 +121,109 @@ type AlarmSensorMessage struct {
 	Header      MessageHeader `json:"header"`
 	AlarmSensor AlarmSensor   `json:"sensor"`
 	Armed       bool          `json:"armed"`
+}
+
+// ThrottleEntry is a time.Duration counter, starting at Min. After every call to
+// the Duration method the current timing is multiplied by Factor, but it
+// never exceeds Max.
+//
+type ThrottleEntry struct {
+	Count  uint64        `json:"count"`
+	Factor float64       `json:"factor"`
+	Jitter bool          `json:"jitter"`
+	Min    time.Duration `json:"min"`
+	Max    time.Duration `json:"max"`
+	Stamp  int64         `json:"stamp"`
+}
+
+// Duration returns the duration for the current attempt before incrementing
+// the attempt counter. See ForAttempt.
+func (t *ThrottleEntry) Duration(minTime time.Duration, maxTime time.Duration) time.Duration {
+	d := t.ForAttempt(float64(atomic.AddUint64(&t.Count, 1)-1)-1, minTime, maxTime)
+	return d
+}
+
+const maxInt64 = float64(math.MaxInt64 - 512)
+
+// ForAttempt returns the duration for a specific attempt. This is useful if
+// you have a large number of independent ThrottleEntry, but don't want use
+// unnecessary memory storing the back off parameters per back off. The first
+// attempt should be 0.
+//
+func (t *ThrottleEntry) ForAttempt(attempt float64, minTime time.Duration, maxTime time.Duration) time.Duration {
+	// Zero-values are nonsensical, so we use
+	// them to apply defaults
+	min := t.Min
+	if min <= 0 {
+		min = minTime
+	}
+	max := t.Max
+	if max <= 0 {
+		max = maxTime
+	}
+	if min >= max {
+		// short-circuit
+		return max
+	}
+	factor := t.Factor
+	if factor <= 0 {
+		factor = 2
+	}
+	//calculate this duration
+	minf := float64(min)
+	durf := minf * math.Pow(factor, attempt)
+	if t.Jitter {
+		durf = rand.Float64()*(durf-minf) + minf
+	}
+	//ensure float64 wont overflow int64
+	if durf > maxInt64 {
+		return max
+	}
+	dur := time.Duration(durf)
+	//keep within bounds
+	if dur < min {
+		return min
+	}
+	if dur > max {
+		return max
+	}
+	return dur
+}
+
+func (t *ThrottleEntry) Reset(minTime time.Duration, maxTime time.Duration) *ThrottleEntry {
+	t.Count = 0
+	t.Factor = 2
+	t.Jitter = false
+	t.Min = minTime
+	t.Max = maxTime
+	t.Stamp = time.Now().Unix()
+
+	return t
+}
+
+// Attempt returns the current attempt counter value.
+func (t *ThrottleEntry) Attempt() uint64 {
+	return t.Count
+}
+
+// Copy returns a ThrottleEntry with equals constraints as the original
+func (t *ThrottleEntry) Copy() *ThrottleEntry {
+	return &ThrottleEntry{
+		Count:  t.Count,
+		Factor: t.Factor,
+		Jitter: t.Jitter,
+		Min:    t.Min,
+		Max:    t.Max,
+		Stamp:  t.Stamp,
+	}
+}
+
+type ThrottleEntries map[string]ThrottleEntry
+
+type ThrottleEntriesMessage struct {
+	Header          MessageHeader   `json:"header"`
+	ThrottleEntries ThrottleEntries `json:"entries"`
+	Armed           bool            `json:"armed"`
 }
 
 type SystemStatus string
