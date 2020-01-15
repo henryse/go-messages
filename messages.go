@@ -97,6 +97,13 @@ type SuccessMessage struct {
 	Message string        `json:"message"`
 }
 
+type WeatherMessage struct {
+	Header   MessageHeader `json:"header"`
+	Message  string        `json:"message"`
+	Expires  time.Time     `json:"expires"`
+	Severity string        `json:"severity"`
+}
+
 type AlarmMessage struct {
 	Header MessageHeader `json:"header"`
 }
