@@ -90,6 +90,7 @@ type TemperatureMessage struct {
 	Celsius    float32       `json:"celsius"`
 	Humidity   float32       `json:"humidity"`
 	Fahrenheit float32       `json:"fahrenheit"`
+	Time       time.Time     `json:"time"`
 }
 
 type SuccessMessage struct {
