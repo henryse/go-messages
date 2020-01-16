@@ -98,11 +98,15 @@ type SuccessMessage struct {
 	Message string        `json:"message"`
 }
 
+type regions []string
+
 type WeatherMessage struct {
 	Header   MessageHeader `json:"header"`
 	Message  string        `json:"message"`
 	Expires  time.Time     `json:"expires"`
 	Severity string        `json:"severity"`
+	Regions  regions       `json:"regions"`
+	Id       int64         `json:"id"`
 }
 
 type AlarmMessage struct {
