@@ -356,6 +356,12 @@ type KasaListMessage struct {
 	Devices interface{}   `json:"devices"`
 }
 
+type KasaSetMessage struct {
+	Header MessageHeader `json:"header"`
+	Alias  string        `json:"alias"`
+	State  bool          `json:"state"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
