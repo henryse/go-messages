@@ -351,6 +351,11 @@ type UPSStatusMessage struct {
 	Status UPSStatus     `json:"status"`
 }
 
+type KasaListMessage struct {
+	Header  MessageHeader `json:"header"`
+	Devices interface{}   `json:"devices"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
