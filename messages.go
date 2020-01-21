@@ -38,19 +38,19 @@ import (
 )
 
 type BuildVersion struct {
-	Version   string                 `json:"version"`
-	BuildTime string                 `json:"build_time"`
-	Image     string                 `json:"image"`
-	ImageID   string                 `json:"image_id"`
-	Versions  map[string]interface{} `json:"versions"`
+	Version   string                 `json:"version,omitempty"`
+	BuildTime string                 `json:"build_time,omitempty"`
+	Image     string                 `json:"image,omitempty"`
+	ImageID   string                 `json:"image_id,omitempty"`
+	Versions  map[string]interface{} `json:"versions,omitempty"`
 }
 
 type MessageHeader struct {
-	Status    int          `json:"status"`
-	Location  string       `json:"location"`
-	TimeStamp time.Time    `json:"timestamp"`
-	Host      string       `json:"host"`
-	Build     BuildVersion `json:"build"`
+	Status    int          `json:"status,omitempty"`
+	Location  string       `json:"location,omitempty"`
+	TimeStamp time.Time    `json:"timestamp,omitempty"`
+	Host      string       `json:"host,omitempty"`
+	Build     BuildVersion `json:"build,omitempty"`
 }
 
 func GetHostName() string {
@@ -63,9 +63,9 @@ func GetHostName() string {
 }
 
 type AlertMessage struct {
-	Header  MessageHeader `json:"header"`
-	Message string        `json:"message"`
-	Source  string        `json:"source"`
+	Header  MessageHeader `json:"header,omitempty"`
+	Message string        `json:"message,omitempty"`
+	Source  string        `json:"source,omitempty"`
 }
 
 func (a *AlertMessage) GetSource() string {
@@ -77,62 +77,62 @@ func (a *AlertMessage) GetSource() string {
 }
 
 type ErrorMessage struct {
-	Header  MessageHeader `json:"header"`
-	Message string        `json:"message"`
+	Header  MessageHeader `json:"header,omitempty"`
+	Message string        `json:"message,omitempty"`
 }
 
 type MotionMessage struct {
-	Header MessageHeader `json:"header"`
+	Header MessageHeader `json:"header,omitempty"`
 }
 
 type TemperatureMessage struct {
-	Header     MessageHeader `json:"header"`
-	Celsius    float32       `json:"celsius"`
-	Humidity   float32       `json:"humidity"`
-	Fahrenheit float32       `json:"fahrenheit"`
-	Time       time.Time     `json:"time"`
+	Header     MessageHeader `json:"header,omitempty"`
+	Celsius    float32       `json:"celsius,omitempty"`
+	Humidity   float32       `json:"humidity,omitempty"`
+	Fahrenheit float32       `json:"fahrenheit,omitempty"`
+	Time       time.Time     `json:"time,omitempty"`
 }
 
 type SuccessMessage struct {
-	Header  MessageHeader `json:"header"`
-	Message string        `json:"message"`
+	Header  MessageHeader `json:"header,omitempty"`
+	Message string        `json:"message,omitempty"`
 }
 
 type regions []string
 
 type WeatherMessage struct {
-	Header   MessageHeader `json:"header"`
-	Message  string        `json:"message"`
-	Expires  time.Time     `json:"expires"`
-	Severity string        `json:"severity"`
-	Regions  regions       `json:"regions"`
-	Id       int64         `json:"id"`
+	Header   MessageHeader `json:"header,omitempty"`
+	Message  string        `json:"message,omitempty"`
+	Expires  time.Time     `json:"expires,omitempty"`
+	Severity string        `json:"severity,omitempty"`
+	Regions  regions       `json:"regions,omitempty"`
+	Id       int64         `json:"id,omitempty"`
 }
 
 type AlarmMessage struct {
-	Header MessageHeader `json:"header"`
+	Header MessageHeader `json:"header,omitempty"`
 }
 
 type AlarmSensor struct {
-	Status string `json:"status"`
-	Number string `json:"number"`
-	Name   string `json:"name"`
-	Stamp  int64  `json:"stamp"`
-	Id     string `json:"id"`
+	Status string `json:"status,omitempty"`
+	Number string `json:"number,omitempty"`
+	Name   string `json:"name,omitempty"`
+	Stamp  int64  `json:"stamp,omitempty"`
+	Id     string `json:"id,omitempty"`
 }
 
 type AlarmSensors map[string]AlarmSensor
 
 type AlarmSensorsMessage struct {
-	Header       MessageHeader `json:"header"`
-	AlarmSensors AlarmSensors  `json:"sensors"`
-	Armed        bool          `json:"armed"`
+	Header       MessageHeader `json:"header,omitempty"`
+	AlarmSensors AlarmSensors  `json:"sensors,omitempty"`
+	Armed        bool          `json:"armed,omitempty"`
 }
 
 type AlarmSensorMessage struct {
-	Header      MessageHeader `json:"header"`
-	AlarmSensor AlarmSensor   `json:"sensor"`
-	Armed       bool          `json:"armed"`
+	Header      MessageHeader `json:"header,omitempty"`
+	AlarmSensor AlarmSensor   `json:"sensor,omitempty"`
+	Armed       bool          `json:"armed,omitempty"`
 }
 
 // ThrottleEntry is a time.Duration counter, starting at Min. After every call to
@@ -140,12 +140,12 @@ type AlarmSensorMessage struct {
 // never exceeds Max.
 //
 type ThrottleEntry struct {
-	Count  uint64        `json:"count"`
-	Factor float64       `json:"factor"`
-	Jitter bool          `json:"jitter"`
-	Min    time.Duration `json:"min"`
-	Max    time.Duration `json:"max"`
-	Stamp  int64         `json:"stamp"`
+	Count  uint64        `json:"count,omitempty"`
+	Factor float64       `json:"factor,omitempty"`
+	Jitter bool          `json:"jitter,omitempty"`
+	Min    time.Duration `json:"min,omitempty"`
+	Max    time.Duration `json:"max,omitempty"`
+	Stamp  int64         `json:"stamp,omitempty"`
 }
 
 // Duration returns the duration for the current attempt before incrementing
@@ -233,9 +233,9 @@ func (t *ThrottleEntry) Copy() *ThrottleEntry {
 type ThrottleEntries []ThrottleEntry
 
 type ThrottleEntriesMessage struct {
-	Header          MessageHeader   `json:"header"`
-	ThrottleEntries ThrottleEntries `json:"entries"`
-	Armed           bool            `json:"armed"`
+	Header          MessageHeader   `json:"header,omitempty"`
+	ThrottleEntries ThrottleEntries `json:"entries,omitempty"`
+	Armed           bool            `json:"armed,omitempty"`
 }
 
 type SystemStatus string
@@ -261,8 +261,8 @@ func ParseSystemState(state string) SystemStatus {
 // SystemStatusMap[system]
 type SystemStatusMap map[string]SystemStatus
 type SystemStatusMessage struct {
-	Header       MessageHeader   `json:"header"`
-	SystemStatus SystemStatusMap `json:"message"`
+	Header       MessageHeader   `json:"header,omitempty"`
+	SystemStatus SystemStatusMap `json:"message,omitempty"`
 }
 
 type DeviceState string
@@ -287,79 +287,79 @@ func ParseDeviceState(state string) DeviceState {
 
 type LocationName string
 type DeviceInfo struct {
-	Device string      `json:"device"`
-	State  DeviceState `json:"state"`
+	Device string      `json:"device,omitempty"`
+	State  DeviceState `json:"state,omitempty"`
 }
 
 // DeviceInfoMap[location]
 type DeviceInfoMap map[string]DeviceInfo
 type DevicesInfoMessage struct {
-	Header  MessageHeader `json:"header"`
-	Devices DeviceInfoMap `json:"devices"`
+	Header  MessageHeader `json:"header,omitempty"`
+	Devices DeviceInfoMap `json:"devices,omitempty"`
 }
 
 // UPS
 type UPSBattery struct {
-	Charge         int     `json:"charge"`
-	ChargeLow      int     `json:"charge_low"`
-	ChargeWarning  int     `json:"charge_warning"`
-	Runtime        int     `json:"runtime"`
-	RuntimeLow     int     `json:"runtime_low"`
-	Type           string  `json:"type"`
-	Voltage        float32 `json:"voltage"`
-	VoltageNominal float32 `json:"voltage_nominal"`
+	Charge         int     `json:"charge,omitempty"`
+	ChargeLow      int     `json:"charge_low,omitempty"`
+	ChargeWarning  int     `json:"charge_warning,omitempty"`
+	Runtime        int     `json:"runtime,omitempty"`
+	RuntimeLow     int     `json:"runtime_low,omitempty"`
+	Type           string  `json:"type,omitempty"`
+	Voltage        float32 `json:"voltage,omitempty"`
+	VoltageNominal float32 `json:"voltage_nominal,omitempty"`
 }
 
 type UPSDriver struct {
-	Name            string `json:"name"`
-	PollFreq        int    `json:"poll_freq"`
-	PollInterval    int    `json:"poll_interval"`
-	Port            string `json:"port"`
-	Synchronous     bool   `json:"synchronous"`
-	Version         string `json:"version"`
-	VersionData     string `json:"version_data"`
-	VersionInternal string `json:"version_internal"`
+	Name            string `json:"name,omitempty"`
+	PollFreq        int    `json:"poll_freq,omitempty"`
+	PollInterval    int    `json:"poll_interval,omitempty"`
+	Port            string `json:"port,omitempty"`
+	Synchronous     bool   `json:"synchronous,omitempty"`
+	Version         string `json:"version,omitempty"`
+	VersionData     string `json:"version_data,omitempty"`
+	VersionInternal string `json:"version_internal,omitempty"`
 }
 
 type UPSStatus struct {
-	Battery             UPSBattery `json:"battery"`
-	DeviceMfr           string     `json:"device_mfr"`
-	DeviceModel         string     `json:"device_model"`
-	DeviceType          string     `json:"device_type"`
-	InputTransferHigh   int        `json:"input_transfer_high"`
-	InputTransferLow    int        `json:"input_transfer_low"`
-	InputVoltage        float32    `json:"input_voltage"`
-	InputVoltageNominal float32    `json:"input_voltage_nominal"`
-	OutputVoltage       float32    `json:"output_voltage"`
-	BeeperStatus        bool       `json:"beeper_status"`
-	DelayShutdown       int        `json:"delay_shutdown"`
-	DelayStart          int        `json:"delay_start"`
-	Load                int        `json:"load"`
-	Mfr                 string     `json:"mfr"`
-	Model               string     `json:"model"`
-	ProductId           string     `json:"product_id"`
-	RealPowerNominal    int        `json:"real_power_nominal"`
-	Status              string     `json:"status"`
-	TestResult          string     `json:"test_result"`
-	TimerShutdown       int        `json:"timer_shutdown"`
-	TimerStart          int        `json:"timer_start"`
-	VendorId            string     `json:"vendor_id"`
+	Battery             UPSBattery `json:"battery,omitempty"`
+	DeviceMfr           string     `json:"device_mfr,omitempty"`
+	DeviceModel         string     `json:"device_model,omitempty"`
+	DeviceType          string     `json:"device_type,omitempty"`
+	InputTransferHigh   int        `json:"input_transfer_high,omitempty"`
+	InputTransferLow    int        `json:"input_transfer_low,omitempty"`
+	InputVoltage        float32    `json:"input_voltage,omitempty"`
+	InputVoltageNominal float32    `json:"input_voltage_nominal,omitempty"`
+	OutputVoltage       float32    `json:"output_voltage,omitempty"`
+	BeeperStatus        bool       `json:"beeper_status,omitempty"`
+	DelayShutdown       int        `json:"delay_shutdown,omitempty"`
+	DelayStart          int        `json:"delay_start,omitempty"`
+	Load                int        `json:"load,omitempty"`
+	Mfr                 string     `json:"mfr,omitempty"`
+	Model               string     `json:"model,omitempty"`
+	ProductId           string     `json:"product_id,omitempty"`
+	RealPowerNominal    int        `json:"real_power_nominal,omitempty"`
+	Status              string     `json:"status,omitempty"`
+	TestResult          string     `json:"test_result,omitempty"`
+	TimerShutdown       int        `json:"timer_shutdown,omitempty"`
+	TimerStart          int        `json:"timer_start,omitempty"`
+	VendorId            string     `json:"vendor_id,omitempty"`
 }
 
 type UPSStatusMessage struct {
-	Header MessageHeader `json:"header"`
-	Status UPSStatus     `json:"status"`
+	Header MessageHeader `json:"header,omitempty"`
+	Status UPSStatus     `json:"status,omitempty"`
 }
 
 type KasaListMessage struct {
-	Header  MessageHeader `json:"header"`
-	Devices interface{}   `json:"devices"`
+	Header  MessageHeader `json:"header,omitempty"`
+	Devices interface{}   `json:"devices,omitempty"`
 }
 
 type KasaSetMessage struct {
-	Header MessageHeader `json:"header"`
-	Alias  string        `json:"alias"`
-	State  bool          `json:"state"`
+	Header MessageHeader `json:"header,omitempty"`
+	Alias  string        `json:"alias,omitempty"`
+	State  bool          `json:"state,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
