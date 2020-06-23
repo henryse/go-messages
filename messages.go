@@ -322,6 +322,7 @@ type UPSDriver struct {
 }
 
 type UPSStatus struct {
+	Name                string     `json:"name,omitempty"`
 	Battery             UPSBattery `json:"battery,omitempty"`
 	DeviceMfr           string     `json:"device_mfr,omitempty"`
 	DeviceModel         string     `json:"device_model,omitempty"`
