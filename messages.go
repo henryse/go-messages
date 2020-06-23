@@ -347,8 +347,8 @@ type UPSStatus struct {
 }
 
 type UPSStatusMessage struct {
-	Header MessageHeader `json:"header,omitempty"`
-	Status UPSStatus     `json:"status,omitempty"`
+	Header  MessageHeader `json:"header,omitempty"`
+	Sources []UPSStatus   `json:"sources,omitempty"`
 }
 
 type KasaListMessage struct {
