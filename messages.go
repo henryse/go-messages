@@ -364,16 +364,16 @@ type KasaSetMessage struct {
 }
 
 type Service struct {
-	ID                string            `json:"id,omitempty"`
-	TTL               int               `json:"ttl,omitempty"`
-	Name              string            `json:"name,omitempty"`
-	IP                string            `json:"ip,omitempty"`
-	Tags              []string          `json:"tags,omitempty"`
-	Attrs             map[string]string `json:"attrs,omitempty"`
-	ContainerHostname string            `json:"container_hostname,omitempty"`
-	ContainerID       string            `json:"container_id,omitempty"`
-	ContainerName     string            `json:"container_name,omitempty"`
-	Ports             []ServicePort     `json:"origin,omitempty"`
+	ID                string                 `json:"id,omitempty"`
+	TTL               int                    `json:"ttl,omitempty"`
+	Name              string                 `json:"name,omitempty"`
+	IP                string                 `json:"ip,omitempty"`
+	Tags              []string               `json:"tags,omitempty"`
+	Attrs             map[string]string      `json:"attrs,omitempty"`
+	ContainerHostname string                 `json:"container_hostname,omitempty"`
+	ContainerID       string                 `json:"container_id,omitempty"`
+	ContainerName     string                 `json:"container_name,omitempty"`
+	Ports             map[string]ServicePort `json:"origin,omitempty"`
 }
 
 type ServicePort struct {
