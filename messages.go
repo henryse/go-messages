@@ -368,6 +368,7 @@ type Service struct {
 	TTL               int                    `json:"ttl,omitempty"`
 	Name              string                 `json:"name,omitempty"`
 	Attrs             map[string]string      `json:"attrs,omitempty"`
+	Status            string                 `json:"status,omitempty"`
 	ContainerHostname string                 `json:"container_hostname,omitempty"`
 	ContainerID       string                 `json:"container_id,omitempty"`
 	ContainerName     string                 `json:"container_name,omitempty"`
