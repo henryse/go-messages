@@ -363,6 +363,40 @@ type KasaSetMessage struct {
 	State  bool          `json:"state,omitempty"`
 }
 
+type Service struct {
+	ID                string            `json:"id,omitempty"`
+	TTL               int               `json:"ttl,omitempty"`
+	Name              string            `json:"name,omitempty"`
+	IP                string            `json:"ip,omitempty"`
+	Tags              []string          `json:"tags,omitempty"`
+	Attrs             map[string]string `json:"attrs,omitempty"`
+	ContainerHostname string            `json:"container_hostname,omitempty"`
+	ContainerID       string            `json:"container_id,omitempty"`
+	ContainerName     string            `json:"container_name,omitempty"`
+	Ports             []ServicePort     `json:"origin,omitempty"`
+}
+
+type ServicePort struct {
+	HostPort    string `json:"host_port,omitempty"`
+	HostIP      string `json:"host_ip,omitempty"`
+	ExposedPort string `json:"exposed_port,omitempty"`
+	ExposedIP   string `json:"exposed_ip,omitempty"`
+	PortType    string `json:"port_type,omitempty"`
+}
+
+//noinspection GoUnusedConst
+const (
+	ServiceEventStart    = "start"
+	ServiceEventStop     = "stop"
+	ServiceEventVanished = "vanish"
+)
+
+type ServiceMessage struct {
+	Header       MessageHeader `json:"header,omitempty"`
+	ServiceEvent string        `json:"event,omitempty"`
+	Service      Service       `json:"service,omitempty"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
