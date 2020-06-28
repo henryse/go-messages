@@ -366,7 +366,7 @@ type KasaSetMessage struct {
 
 type Service struct {
 	ID                string                 `json:"id,omitempty"`
-	TTL               int                    `json:"ttl,omitempty"`
+	TTL               time.Duration          `json:"ttl,omitempty"`
 	Name              string                 `json:"name,omitempty"`
 	Attrs             map[string]string      `json:"attrs,omitempty"`
 	Status            string                 `json:"status,omitempty"`
