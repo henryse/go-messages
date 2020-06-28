@@ -29,6 +29,7 @@ package messages
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"math"
 	"math/rand"
 	"os"
@@ -405,6 +406,9 @@ func CreateHeader(status int, location string) MessageHeader {
 	buildBytes, err := ioutil.ReadFile("/opt/build_version.json")
 	if err == nil {
 		err = json.Unmarshal(buildBytes, &build)
+		log.Println("[INFO] Reading version: ", string(buildBytes))
+	} else {
+		log.Println("[ERROR] Unable to read /opt/build_version.json file:", err)
 	}
 
 	// Build Message Header
