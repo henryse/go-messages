@@ -388,6 +388,7 @@ type ServicePort struct {
 const (
 	ServiceEventStart    = "start"
 	ServiceEventStop     = "stop"
+	ServiceEventActive   = "active"
 	ServiceEventVanished = "vanish"
 )
 
