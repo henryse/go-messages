@@ -365,16 +365,14 @@ type KasaSetMessage struct {
 }
 
 type Service struct {
-	ID                string                 `json:"id,omitempty"`
-	TTL               time.Duration          `json:"ttl,omitempty"`
-	TTLStamp          time.Time              `json:"ttl_stamp,omitempty"`
-	Name              string                 `json:"name,omitempty"`
-	Attrs             map[string]string      `json:"attrs,omitempty"`
-	Status            string                 `json:"status,omitempty"`
-	ContainerHostname string                 `json:"container_hostname,omitempty"`
-	ContainerID       string                 `json:"container_id,omitempty"`
-	ContainerName     string                 `json:"container_name,omitempty"`
-	Ports             map[string]ServicePort `json:"origin,omitempty"`
+	ID       string                 `json:"id,omitempty"`
+	TTL      time.Duration          `json:"ttl,omitempty"`
+	TTLStamp time.Time              `json:"ttl_stamp,omitempty"`
+	Name     string                 `json:"name,omitempty"`
+	Attrs    map[string]string      `json:"attrs,omitempty"`
+	Status   string                 `json:"status,omitempty"`
+	Hostname string                 `json:"hostname,omitempty"`
+	Ports    map[string]ServicePort `json:"origin,omitempty"`
 }
 
 type ServicePort struct {
