@@ -79,6 +79,7 @@ func (a *AlertMessage) GetSource() string {
 
 type ErrorMessage struct {
 	Header  MessageHeader `json:"header,omitempty"`
+	Source  string        `json:"source,omitempty"`
 	Message string        `json:"message,omitempty"`
 }
 
