@@ -400,22 +400,22 @@ type ServiceMessage struct {
 
 type WeatherStations struct {
 	Observations []struct {
-		StationID         string      `json:"stationID, omitempty"`
-		Name              string      `json:"name, omitempty"`
-		ObsTimeUtc        time.Time   `json:"obsTimeUtc, omitempty"`
-		ObsTimeLocal      string      `json:"obsTimeLocal, omitempty"`
-		Neighborhood      string      `json:"neighborhood, omitempty"`
-		SoftwareType      string      `json:"softwareType, omitempty"`
-		Country           string      `json:"country, omitempty"`
-		SolarRadiation    interface{} `json:"solarRadiation, omitempty"`
-		Lon               float64     `json:"lon, omitempty"`
-		RealtimeFrequency interface{} `json:"realtimeFrequency, omitempty"`
-		Epoch             int         `json:"epoch, omitempty"`
-		Lat               float64     `json:"lat, omitempty"`
-		Uv                float64     `json:"uv, omitempty"`
-		Winddir           int         `json:"winddir, omitempty"`
-		Humidity          int         `json:"humidity, omitempty"`
-		QcStatus          int         `json:"qcStatus, omitempty"`
+		StationID         string    `json:"stationID, omitempty"`
+		Name              string    `json:"name, omitempty"`
+		ObsTimeUtc        time.Time `json:"obsTimeUtc, omitempty"`
+		ObsTimeLocal      string    `json:"obsTimeLocal, omitempty"`
+		Neighborhood      string    `json:"neighborhood, omitempty"`
+		SoftwareType      string    `json:"softwareType, omitempty"`
+		Country           string    `json:"country, omitempty"`
+		SolarRadiation    string    `json:"solarRadiation, omitempty"`
+		Lon               float64   `json:"longitude, omitempty"`
+		RealtimeFrequency string    `json:"realtimeFrequency, omitempty"`
+		Epoch             int       `json:"epoch, omitempty"`
+		Lat               float64   `json:"latitude, omitempty"`
+		Uv                float64   `json:"uv, omitempty"`
+		Winddir           int       `json:"winddir, omitempty"`
+		Humidity          int       `json:"humidity, omitempty"`
+		QcStatus          int       `json:"qcStatus, omitempty"`
 		Imperial          struct {
 			Temp        int     `json:"temp, omitempty"`
 			HeatIndex   int     `json:"heatIndex, omitempty"`
