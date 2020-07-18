@@ -102,7 +102,7 @@ type SuccessMessage struct {
 
 type regions []string
 
-type WeatherMessage struct {
+type WeatherAlertMessage struct {
 	Header   MessageHeader `json:"header,omitempty"`
 	Message  string        `json:"message,omitempty"`
 	Expires  time.Time     `json:"expires,omitempty"`
@@ -396,6 +396,44 @@ type ServiceMessage struct {
 	Header       MessageHeader `json:"header,omitempty"`
 	ServiceEvent string        `json:"event,omitempty"`
 	Service      Service       `json:"service,omitempty"`
+}
+
+type WeatherStations struct {
+	Observations []struct {
+		StationID         string      `json:"stationID, omitempty"`
+		Name              string      `json:"name, omitempty"`
+		ObsTimeUtc        time.Time   `json:"obsTimeUtc, omitempty"`
+		ObsTimeLocal      string      `json:"obsTimeLocal, omitempty"`
+		Neighborhood      string      `json:"neighborhood, omitempty"`
+		SoftwareType      string      `json:"softwareType, omitempty"`
+		Country           string      `json:"country, omitempty"`
+		SolarRadiation    interface{} `json:"solarRadiation, omitempty"`
+		Lon               float64     `json:"lon, omitempty"`
+		RealtimeFrequency interface{} `json:"realtimeFrequency, omitempty"`
+		Epoch             int         `json:"epoch, omitempty"`
+		Lat               float64     `json:"lat, omitempty"`
+		Uv                float64     `json:"uv, omitempty"`
+		Winddir           int         `json:"winddir, omitempty"`
+		Humidity          int         `json:"humidity, omitempty"`
+		QcStatus          int         `json:"qcStatus, omitempty"`
+		Imperial          struct {
+			Temp        int     `json:"temp, omitempty"`
+			HeatIndex   int     `json:"heatIndex, omitempty"`
+			Dewpt       int     `json:"dewpt, omitempty"`
+			WindChill   int     `json:"windChill, omitempty"`
+			WindSpeed   int     `json:"windSpeed, omitempty"`
+			WindGust    int     `json:"windGust, omitempty"`
+			Pressure    float64 `json:"pressure, omitempty"`
+			PrecipRate  float64 `json:"precipRate, omitempty"`
+			PrecipTotal float64 `json:"precipTotal, omitempty"`
+			Elev        int     `json:"elev, omitempty"`
+		} `json:"imperial, omitempty"`
+	} `json:"observations, omitempty"`
+}
+
+type WeatherMessage struct {
+	Header   MessageHeader   `json:"header,omitempty"`
+	Stations WeatherStations `json:"stations,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
