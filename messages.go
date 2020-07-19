@@ -398,7 +398,8 @@ type ServiceMessage struct {
 	Service      Service       `json:"service,omitempty"`
 }
 
-type WeatherStations struct {
+type WeatherMessage struct {
+	Header       MessageHeader `json:"header,omitempty"`
 	Observations []struct {
 		StationID         string    `json:"stationID, omitempty"`
 		Name              string    `json:"name, omitempty"`
@@ -429,11 +430,6 @@ type WeatherStations struct {
 			Elev        int     `json:"elev, omitempty"`
 		} `json:"imperial, omitempty"`
 	} `json:"observations, omitempty"`
-}
-
-type WeatherMessage struct {
-	Header   MessageHeader   `json:"header,omitempty"`
-	Stations WeatherStations `json:"stations,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
