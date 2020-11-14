@@ -63,10 +63,20 @@ func GetHostName() string {
 	return host
 }
 
+type AlertSeverity int
+
+//goland:noinspection GoUnusedConst
+const (
+	Info    AlertSeverity = 0
+	Warning AlertSeverity = 1
+	Error   AlertSeverity = 2
+)
+
 type AlertMessage struct {
-	Header  MessageHeader `json:"header,omitempty"`
-	Message string        `json:"message,omitempty"`
-	Source  string        `json:"source,omitempty"`
+	Header   MessageHeader `json:"header,omitempty"`
+	Severity AlertSeverity `json:"severity,omitempty"`
+	Source   string        `json:"source,omitempty"`
+	Message  string        `json:"message,omitempty"`
 }
 
 func (a *AlertMessage) GetSource() string {
@@ -184,16 +194,16 @@ func (t *ThrottleEntry) ForAttempt(attempt float64, minTime time.Duration, maxTi
 		factor = 2
 	}
 	//calculate this duration
-	minf := float64(min)
-	durf := minf * math.Pow(factor, attempt)
+	minFloat := float64(min)
+	durationFloat := minFloat * math.Pow(factor, attempt)
 	if t.Jitter {
-		durf = rand.Float64()*(durf-minf) + minf
+		durationFloat = rand.Float64()*(durationFloat-minFloat) + minFloat
 	}
 	//ensure float64 wont overflow int64
-	if durf > maxInt64 {
+	if durationFloat > maxInt64 {
 		return max
 	}
-	dur := time.Duration(durf)
+	dur := time.Duration(durationFloat)
 	//keep within bounds
 	if dur < min {
 		return min
@@ -399,41 +409,41 @@ type ServiceMessage struct {
 }
 
 type Observation struct {
-	StationID         string    `json:"stationID, omitempty"`
-	Name              string    `json:"name, omitempty"`
-	ObsTimeUtc        time.Time `json:"obsTimeUtc, omitempty"`
-	ObsTimeLocal      string    `json:"obsTimeLocal, omitempty"`
-	Neighborhood      string    `json:"neighborhood, omitempty"`
-	SoftwareType      string    `json:"softwareType, omitempty"`
-	Country           string    `json:"country, omitempty"`
-	SolarRadiation    string    `json:"solarRadiation, omitempty"`
-	Lon               float64   `json:"longitude, omitempty"`
-	RealtimeFrequency string    `json:"realtimeFrequency, omitempty"`
-	Epoch             int       `json:"epoch, omitempty"`
-	Lat               float64   `json:"latitude, omitempty"`
-	Uv                float64   `json:"uv, omitempty"`
-	Winddir           int       `json:"winddir, omitempty"`
-	Humidity          int       `json:"humidity, omitempty"`
-	QcStatus          int       `json:"qcStatus, omitempty"`
+	StationID         string    `json:"stationID,omitempty"`
+	Name              string    `json:"name,omitempty"`
+	ObsTimeUtc        time.Time `json:"obsTimeUtc,omitempty"`
+	ObsTimeLocal      string    `json:"obsTimeLocal,omitempty"`
+	Neighborhood      string    `json:"neighborhood,omitempty"`
+	SoftwareType      string    `json:"softwareType,omitempty"`
+	Country           string    `json:"country,omitempty"`
+	SolarRadiation    string    `json:"solarRadiation,omitempty"`
+	Lon               float64   `json:"longitude,omitempty"`
+	RealtimeFrequency string    `json:"realtimeFrequency,omitempty"`
+	Epoch             int       `json:"epoch,omitempty"`
+	Lat               float64   `json:"latitude,omitempty"`
+	Uv                float64   `json:"uv,omitempty"`
+	Winddir           int       `json:"winddir,omitempty"`
+	Humidity          int       `json:"humidity,omitempty"`
+	QcStatus          int       `json:"qcStatus,omitempty"`
 	Imperial          struct {
-		Temp        int     `json:"temp, omitempty"`
-		HeatIndex   int     `json:"heatIndex, omitempty"`
-		Dewpt       int     `json:"dewpt, omitempty"`
-		WindChill   int     `json:"windChill, omitempty"`
-		WindSpeed   int     `json:"windSpeed, omitempty"`
-		WindGust    int     `json:"windGust, omitempty"`
-		Pressure    float64 `json:"pressure, omitempty"`
-		PrecipRate  float64 `json:"precipRate, omitempty"`
-		PrecipTotal float64 `json:"precipTotal, omitempty"`
-		Elev        int     `json:"elev, omitempty"`
-	} `json:"imperial, omitempty"`
+		Temp        int     `json:"temp,omitempty"`
+		HeatIndex   int     `json:"heatIndex,omitempty"`
+		Dewpt       int     `json:"dewpt,omitempty"`
+		WindChill   int     `json:"windChill,omitempty"`
+		WindSpeed   int     `json:"windSpeed,omitempty"`
+		WindGust    int     `json:"windGust,omitempty"`
+		Pressure    float64 `json:"pressure,omitempty"`
+		PrecipRate  float64 `json:"precipRate,omitempty"`
+		PrecipTotal float64 `json:"precipTotal,omitempty"`
+		Elev        int     `json:"elev,omitempty"`
+	} `json:"imperial,omitempty"`
 }
 
 type Observations []Observation
 
 type WeatherMessage struct {
 	Header       MessageHeader `json:"header,omitempty"`
-	Observations Observations  `json:"observations, omitempty"`
+	Observations Observations  `json:"observations,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
