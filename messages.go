@@ -67,9 +67,9 @@ type AlertSeverity int
 
 //goland:noinspection GoUnusedConst
 const (
-	Info    AlertSeverity = 0
-	Warning AlertSeverity = 1
-	Error   AlertSeverity = 2
+	Info    AlertSeverity = 0 // Nothing to worry about FYI
+	Warning AlertSeverity = 1 // Should be looked into soon
+	Error   AlertSeverity = 2 // Houston we have a problem
 )
 
 type AlertMessage struct {
