@@ -95,13 +95,13 @@ type ErrorMessage struct {
 }
 
 type Text struct {
-	ID        string        `json:"id,omitempty"`
+	ID        string        `json:"id"`
 	Source    string        `json:"source,omitempty"`
 	Location  string        `json:"location,omitempty"`
-	TimeStamp time.Time     `json:"timestamp,omitempty"`
+	TimeStamp time.Time     `json:"timestamp"`
 	Host      string        `json:"host,omitempty"`
-	Severity  AlertSeverity `json:"severity,omitempty"`
-	Body      string        `json:"body,omitempty"`
+	Severity  AlertSeverity `json:"severity"`
+	Body      string        `json:"body"`
 }
 
 type Texts []Text
