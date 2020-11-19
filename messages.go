@@ -70,6 +70,7 @@ const (
 	Info    AlertSeverity = 0 // Nothing to worry about FYI
 	Warning AlertSeverity = 1 // Should be looked into soon
 	Error   AlertSeverity = 2 // Houston we have a problem
+	Cleared AlertSeverity = 3 // The issue has been addressed
 )
 
 type AlertMessage struct {
@@ -93,6 +94,25 @@ type ErrorMessage struct {
 	Message string        `json:"message,omitempty"`
 }
 
+type ObjectID [12]byte
+
+type Text struct {
+	ID        ObjectID      `json:"id,omitempty"`
+	Source    string        `json:"source,omitempty"`
+	Location  string        `json:"location,omitempty"`
+	TimeStamp time.Time     `json:"timestamp,omitempty"`
+	Host      string        `json:"host,omitempty"`
+	Severity  AlertSeverity `json:"severity,omitempty"`
+	Message   string        `json:"message,omitempty"`
+}
+
+type Texts []Text
+
+type TextMessage struct {
+	Header MessageHeader `json:"header,omitempty"`
+	Texts  Texts         `json:"texts,omitempty"`
+}
+
 type MotionMessage struct {
 	Header MessageHeader `json:"header,omitempty"`
 }
@@ -110,14 +130,14 @@ type SuccessMessage struct {
 	Message string        `json:"message,omitempty"`
 }
 
-type regions []string
+type Regions []string
 
 type WeatherAlertMessage struct {
 	Header   MessageHeader `json:"header,omitempty"`
 	Message  string        `json:"message,omitempty"`
 	Expires  time.Time     `json:"expires,omitempty"`
 	Severity string        `json:"severity,omitempty"`
-	Regions  regions       `json:"regions,omitempty"`
+	Regions  Regions       `json:"Regions,omitempty"`
 	Id       int64         `json:"id,omitempty"`
 }
 
