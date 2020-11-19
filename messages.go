@@ -94,10 +94,8 @@ type ErrorMessage struct {
 	Message string        `json:"message,omitempty"`
 }
 
-type ObjectID [12]byte
-
 type Text struct {
-	ID        ObjectID      `json:"id,omitempty"`
+	ID        string        `json:"id,omitempty"`
 	Source    string        `json:"source,omitempty"`
 	Location  string        `json:"location,omitempty"`
 	TimeStamp time.Time     `json:"timestamp,omitempty"`
