@@ -103,7 +103,7 @@ type Text struct {
 	TimeStamp time.Time     `json:"timestamp,omitempty"`
 	Host      string        `json:"host,omitempty"`
 	Severity  AlertSeverity `json:"severity,omitempty"`
-	Message   string        `json:"message,omitempty"`
+	Body      string        `json:"body,omitempty"`
 }
 
 type Texts []Text
