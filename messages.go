@@ -101,6 +101,7 @@ type Text struct {
 	TimeStamp time.Time     `json:"timestamp"`
 	Host      string        `json:"host,omitempty"`
 	Severity  AlertSeverity `json:"severity"`
+	Count     int           `json:"count,omitempty"`
 	Body      string        `json:"body"`
 }
 
