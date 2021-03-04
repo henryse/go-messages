@@ -402,6 +402,7 @@ type Service struct {
 	Attrs    map[string]string      `json:"attrs,omitempty"`
 	Status   string                 `json:"status,omitempty"`
 	Hostname string                 `json:"hostname,omitempty"`
+	HostIP   string                 `json:"host_ip,omitempty"`
 	Ports    map[string]ServicePort `json:"origin,omitempty"`
 }
 
