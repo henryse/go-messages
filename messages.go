@@ -467,10 +467,9 @@ type WeatherMessage struct {
 }
 
 type DaylightDate struct {
-	Year  int        `json:"year,omitempty"`
-	Month time.Month `json:"month,omitempty"`
-	Day   int        `json:"day,omitempty"`
-	Hours int        `json:"hours,omitempty"`
+	Hours   int       `json:"hours,omitempty"`
+	Sunrise time.Time `json:"sunrise,omitempty"`
+	Sunset  time.Time `json:"sunset,omitempty"`
 }
 
 type DaylightDates []DaylightDate
