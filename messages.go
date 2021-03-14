@@ -466,6 +466,20 @@ type WeatherMessage struct {
 	Observations Observations  `json:"observations,omitempty"`
 }
 
+type DaylightDate struct {
+	Year  int        `json:"year,omitempty"`
+	Month time.Month `json:"month,omitempty"`
+	Day   int        `json:"day,omitempty"`
+	Hours int        `json:"hours,omitempty"`
+}
+
+type DaylightDates []DaylightDate
+
+type DaylightMessage struct {
+	Header       MessageHeader `json:"header,omitempty"`
+	DayLightDays DaylightDates `json:"days,omitempty"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
