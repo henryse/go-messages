@@ -29,6 +29,7 @@ package messages
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 	"math"
 	"math/rand"
 	"os"
@@ -62,10 +63,21 @@ func GetHostName() string {
 	return host
 }
 
+type AlertSeverity int
+
+//goland:noinspection GoUnusedConst
+const (
+	Info    AlertSeverity = 0 // Nothing to worry about FYI
+	Warning AlertSeverity = 1 // Should be looked into soon
+	Error   AlertSeverity = 2 // Houston we have a problem
+	Cleared AlertSeverity = 3 // The issue has been addressed
+)
+
 type AlertMessage struct {
-	Header  MessageHeader `json:"header,omitempty"`
-	Message string        `json:"message,omitempty"`
-	Source  string        `json:"source,omitempty"`
+	Header   MessageHeader `json:"header,omitempty"`
+	Severity AlertSeverity `json:"severity,omitempty"`
+	Source   string        `json:"source,omitempty"`
+	Message  string        `json:"message,omitempty"`
 }
 
 func (a *AlertMessage) GetSource() string {
@@ -78,7 +90,26 @@ func (a *AlertMessage) GetSource() string {
 
 type ErrorMessage struct {
 	Header  MessageHeader `json:"header,omitempty"`
+	Source  string        `json:"source,omitempty"`
 	Message string        `json:"message,omitempty"`
+}
+
+type Text struct {
+	ID        string        `json:"id"`
+	Source    string        `json:"source,omitempty"`
+	Location  string        `json:"location,omitempty"`
+	TimeStamp time.Time     `json:"timestamp"`
+	Host      string        `json:"host,omitempty"`
+	Severity  AlertSeverity `json:"severity"`
+	Count     int           `json:"count,omitempty"`
+	Body      string        `json:"body"`
+}
+
+type Texts []Text
+
+type TextMessage struct {
+	Header MessageHeader `json:"header,omitempty"`
+	Texts  Texts         `json:"texts,omitempty"`
 }
 
 type MotionMessage struct {
@@ -98,14 +129,14 @@ type SuccessMessage struct {
 	Message string        `json:"message,omitempty"`
 }
 
-type regions []string
+type Regions []string
 
-type WeatherMessage struct {
+type WeatherAlertMessage struct {
 	Header   MessageHeader `json:"header,omitempty"`
 	Message  string        `json:"message,omitempty"`
 	Expires  time.Time     `json:"expires,omitempty"`
 	Severity string        `json:"severity,omitempty"`
-	Regions  regions       `json:"regions,omitempty"`
+	Regions  Regions       `json:"Regions,omitempty"`
 	Id       int64         `json:"id,omitempty"`
 }
 
@@ -182,16 +213,16 @@ func (t *ThrottleEntry) ForAttempt(attempt float64, minTime time.Duration, maxTi
 		factor = 2
 	}
 	//calculate this duration
-	minf := float64(min)
-	durf := minf * math.Pow(factor, attempt)
+	minFloat := float64(min)
+	durationFloat := minFloat * math.Pow(factor, attempt)
 	if t.Jitter {
-		durf = rand.Float64()*(durf-minf) + minf
+		durationFloat = rand.Float64()*(durationFloat-minFloat) + minFloat
 	}
 	//ensure float64 wont overflow int64
-	if durf > maxInt64 {
+	if durationFloat > maxInt64 {
 		return max
 	}
-	dur := time.Duration(durf)
+	dur := time.Duration(durationFloat)
 	//keep within bounds
 	if dur < min {
 		return min
@@ -258,7 +289,7 @@ func ParseSystemState(state string) SystemStatus {
 	return UNDEFINED
 }
 
-// SystemStatusMap SystemStatusMap[system]
+// SystemStatusMap[system]
 type SystemStatusMap map[string]SystemStatus
 type SystemStatusMessage struct {
 	Header       MessageHeader   `json:"header,omitempty"`
@@ -291,14 +322,14 @@ type DeviceInfo struct {
 	State  DeviceState `json:"state,omitempty"`
 }
 
-// DeviceInfoMap DeviceInfoMap[location]
+// DeviceInfoMap[location]
 type DeviceInfoMap map[string]DeviceInfo
 type DevicesInfoMessage struct {
 	Header  MessageHeader `json:"header,omitempty"`
 	Devices DeviceInfoMap `json:"devices,omitempty"`
 }
 
-// UPSBattery UPS
+// UPS
 type UPSBattery struct {
 	Charge         int     `json:"charge,omitempty"`
 	ChargeLow      int     `json:"charge_low,omitempty"`
@@ -322,6 +353,7 @@ type UPSDriver struct {
 }
 
 type UPSStatus struct {
+	Name                string     `json:"name,omitempty"`
 	Battery             UPSBattery `json:"battery,omitempty"`
 	DeviceMfr           string     `json:"device_mfr,omitempty"`
 	DeviceModel         string     `json:"device_model,omitempty"`
@@ -347,8 +379,8 @@ type UPSStatus struct {
 }
 
 type UPSStatusMessage struct {
-	Header MessageHeader `json:"header,omitempty"`
-	Status UPSStatus     `json:"status,omitempty"`
+	Header  MessageHeader `json:"header,omitempty"`
+	Sources []UPSStatus   `json:"sources,omitempty"`
 }
 
 type KasaListMessage struct {
@@ -362,27 +394,89 @@ type KasaSetMessage struct {
 	State  bool          `json:"state,omitempty"`
 }
 
-type Plant struct {
-	ID        string `json:"id,omitempty"`
-	Tag       string `json:"tag,omitempty"`
-	Strain    string `json:"strain,omitempty"`
-	Location  string `json:"location,omitempty"`
-	Phase     string `json:"phase,omitempty"`
-	State     string `json:"state,omitempty"`
-	Group     string `json:"group,omitempty"`
-	GroupType string `json:"groupType,omitempty"`
+type Service struct {
+	ID       string                 `json:"id,omitempty"`
+	TTL      time.Duration          `json:"ttl,omitempty"`
+	TTLStamp time.Time              `json:"ttl_stamp,omitempty"`
+	Name     string                 `json:"name,omitempty"`
+	Attrs    map[string]string      `json:"attrs,omitempty"`
+	Status   string                 `json:"status,omitempty"`
+	Hostname string                 `json:"hostname,omitempty"`
+	HostIP   string                 `json:"host_ip,omitempty"`
+	Ports    map[string]ServicePort `json:"origin,omitempty"`
 }
 
-type Plants []Plant
-
-type PlantMessage struct {
-	Header MessageHeader `json:"header,omitempty"`
-	Plant  Plant         `json:"plant,omitempty"`
+type ServicePort struct {
+	HostPort    string `json:"host_port,omitempty"`
+	HostIP      string `json:"host_ip,omitempty"`
+	ExposedPort string `json:"exposed_port,omitempty"`
+	ExposedIP   string `json:"exposed_ip,omitempty"`
+	PortType    string `json:"port_type,omitempty"`
 }
 
-type PlantsMessage struct {
-	Header MessageHeader `json:"header,omitempty"`
-	Plant  Plants        `json:"plants,omitempty"`
+//noinspection GoUnusedConst
+const (
+	ServiceEventStart    = "start"
+	ServiceEventStop     = "stop"
+	ServiceEventActive   = "active"
+	ServiceEventVanished = "vanish"
+)
+
+type ServiceMessage struct {
+	Header       MessageHeader `json:"header,omitempty"`
+	ServiceEvent string        `json:"event,omitempty"`
+	Service      Service       `json:"service,omitempty"`
+}
+
+type Observation struct {
+	StationID         string    `json:"stationID,omitempty"`
+	Name              string    `json:"name,omitempty"`
+	ObsTimeUtc        time.Time `json:"obsTimeUtc,omitempty"`
+	ObsTimeLocal      string    `json:"obsTimeLocal,omitempty"`
+	Neighborhood      string    `json:"neighborhood,omitempty"`
+	SoftwareType      string    `json:"softwareType,omitempty"`
+	Country           string    `json:"country,omitempty"`
+	SolarRadiation    string    `json:"solarRadiation,omitempty"`
+	Lon               float64   `json:"longitude,omitempty"`
+	RealtimeFrequency string    `json:"realtimeFrequency,omitempty"`
+	Epoch             int       `json:"epoch,omitempty"`
+	Lat               float64   `json:"latitude,omitempty"`
+	Uv                float64   `json:"uv,omitempty"`
+	Winddir           int       `json:"winddir,omitempty"`
+	Humidity          int       `json:"humidity,omitempty"`
+	QcStatus          int       `json:"qcStatus,omitempty"`
+	Imperial          struct {
+		Temp        int     `json:"temp,omitempty"`
+		HeatIndex   int     `json:"heatIndex,omitempty"`
+		Dewpt       int     `json:"dewpt,omitempty"`
+		WindChill   int     `json:"windChill,omitempty"`
+		WindSpeed   int     `json:"windSpeed,omitempty"`
+		WindGust    int     `json:"windGust,omitempty"`
+		Pressure    float64 `json:"pressure,omitempty"`
+		PrecipRate  float64 `json:"precipRate,omitempty"`
+		PrecipTotal float64 `json:"precipTotal,omitempty"`
+		Elev        int     `json:"elev,omitempty"`
+	} `json:"imperial,omitempty"`
+}
+
+type Observations []Observation
+
+type WeatherMessage struct {
+	Header       MessageHeader `json:"header,omitempty"`
+	Observations Observations  `json:"observations,omitempty"`
+}
+
+type DaylightDate struct {
+	Hours   int       `json:"hours,omitempty"`
+	Sunrise time.Time `json:"sunrise,omitempty"`
+	Sunset  time.Time `json:"sunset,omitempty"`
+}
+
+type DaylightDates []DaylightDate
+
+type DaylightMessage struct {
+	Header       MessageHeader `json:"header,omitempty"`
+	DayLightDays DaylightDates `json:"days,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
@@ -394,6 +488,9 @@ func CreateHeader(status int, location string) MessageHeader {
 	buildBytes, err := ioutil.ReadFile("/opt/build_version.json")
 	if err == nil {
 		err = json.Unmarshal(buildBytes, &build)
+		log.Println("[INFO] Reading version: ", string(buildBytes))
+	} else {
+		log.Println("[ERROR] Unable to read /opt/build_version.json file:", err)
 	}
 
 	// Build Message Header
