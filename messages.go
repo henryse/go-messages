@@ -258,7 +258,7 @@ func ParseSystemState(state string) SystemStatus {
 	return UNDEFINED
 }
 
-// SystemStatusMap[system]
+// SystemStatusMap SystemStatusMap[system]
 type SystemStatusMap map[string]SystemStatus
 type SystemStatusMessage struct {
 	Header       MessageHeader   `json:"header,omitempty"`
@@ -291,14 +291,14 @@ type DeviceInfo struct {
 	State  DeviceState `json:"state,omitempty"`
 }
 
-// DeviceInfoMap[location]
+// DeviceInfoMap DeviceInfoMap[location]
 type DeviceInfoMap map[string]DeviceInfo
 type DevicesInfoMessage struct {
 	Header  MessageHeader `json:"header,omitempty"`
 	Devices DeviceInfoMap `json:"devices,omitempty"`
 }
 
-// UPS
+// UPSBattery UPS
 type UPSBattery struct {
 	Charge         int     `json:"charge,omitempty"`
 	ChargeLow      int     `json:"charge_low,omitempty"`
@@ -360,6 +360,29 @@ type KasaSetMessage struct {
 	Header MessageHeader `json:"header,omitempty"`
 	Alias  string        `json:"alias,omitempty"`
 	State  bool          `json:"state,omitempty"`
+}
+
+type Plant struct {
+	ID        string `json:"id,omitempty"`
+	Tag       string `json:"tag,omitempty"`
+	Strain    string `json:"strain,omitempty"`
+	Location  string `json:"location,omitempty"`
+	Phase     string `json:"phase,omitempty"`
+	State     string `json:"state,omitempty"`
+	Group     string `json:"group,omitempty"`
+	GroupType string `json:"groupType,omitempty"`
+}
+
+type Plants []Plant
+
+type PlantMessage struct {
+	Header MessageHeader `json:"header,omitempty"`
+	Plant  Plant         `json:"plant,omitempty"`
+}
+
+type PlantsMessage struct {
+	Header MessageHeader `json:"header,omitempty"`
+	Plant  Plants        `json:"plants,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
