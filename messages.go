@@ -509,7 +509,7 @@ type PlantMessage struct {
 
 type PlantsMessage struct {
 	Header MessageHeader `json:"header,omitempty"`
-	Plant  Plants        `json:"plants,omitempty"`
+	Plants Plants        `json:"plants,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
