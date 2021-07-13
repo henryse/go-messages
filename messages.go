@@ -512,6 +512,11 @@ type PlantsMessage struct {
 	Plants Plants        `json:"plants,omitempty"`
 }
 
+type TagsMessage struct {
+	Header MessageHeader `json:"header,omitempty"`
+	Tags   []string      `json:"tags,omitempty"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
