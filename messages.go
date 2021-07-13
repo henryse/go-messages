@@ -476,6 +476,19 @@ type DaylightMessage struct {
 	DayLightDays DaylightDates `json:"days,omitempty"`
 }
 
+//goland:noinspection GoUnusedConst
+const (
+	stateActive    = "active"
+	stateHarvested = "harvested"
+	stateInactive  = "destroyed"
+
+	phaseVegetative = "vegetative"
+	phaseFlowering  = "flowering"
+
+	operationInsert = "insert"
+	operationUpsert = "upsert"
+)
+
 type Plant struct {
 	ID        string `json:"id,omitempty"`
 	Tag       string `json:"tag,omitempty"`
