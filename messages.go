@@ -513,8 +513,10 @@ type PlantsMessage struct {
 }
 
 type TagsMessage struct {
-	Header MessageHeader `json:"header,omitempty"`
-	Tags   []string      `json:"tags,omitempty"`
+	Header         MessageHeader `json:"header,omitempty"`
+	FlowerTags     []string      `json:"flowerTags,omitempty"`
+	VegetativeTags []string      `json:"vegetativeTags,omitempty"`
+	DestroyedTags  []string      `json:"destroyedTags,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
