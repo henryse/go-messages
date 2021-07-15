@@ -517,6 +517,7 @@ type TagsMessage struct {
 	FlowerTags     []string      `json:"flowerTags,omitempty"`
 	VegetativeTags []string      `json:"vegetativeTags,omitempty"`
 	DestroyedTags  []string      `json:"destroyedTags,omitempty"`
+	HarvestedTags  []string      `json:"harvestedTags,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
