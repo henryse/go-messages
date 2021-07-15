@@ -514,7 +514,7 @@ type PlantsMessage struct {
 
 type TagsMessage struct {
 	Header         MessageHeader `json:"header,omitempty"`
-	FlowerTags     []string      `json:"flowerTags,omitempty"`
+	FloweringTags  []string      `json:"floweringTags,omitempty"`
 	VegetativeTags []string      `json:"vegetativeTags,omitempty"`
 	DestroyedTags  []string      `json:"destroyedTags,omitempty"`
 	HarvestedTags  []string      `json:"harvestedTags,omitempty"`
