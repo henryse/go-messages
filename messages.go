@@ -520,6 +520,11 @@ type TagsMessage struct {
 	HarvestedTags  []string      `json:"harvestedTags,omitempty"`
 }
 
+type LoginMessage struct {
+	Header   MessageHeader     `json:"header,omitempty"`
+	Settings map[string]string `json:"settings,omitempty"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
