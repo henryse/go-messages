@@ -520,6 +520,27 @@ type TagsMessage struct {
 	HarvestedTags  []string      `json:"harvestedTags,omitempty"`
 }
 
+type PlantNote struct {
+	ID         string    `json:"id,omitempty"`
+	Tag        string    `json:"tag,omitempty"`
+	Title      string    `json:"title,omitempty"`
+	Body       string    `json:"body,omitempty"`
+	CreateDate time.Time `json:"createDate,omitempty"`
+	UpdateDate time.Time `json:"updateDate,omitempty"`
+}
+
+type PlantNotes []PlantNote
+
+type PlantNoteMessage struct {
+	Header MessageHeader `json:"header,omitempty"`
+	Note   PlantNote     `json:"note,omitempty"`
+}
+
+type PlantNotesMessage struct {
+	Header MessageHeader `json:"header,omitempty"`
+	Notes  PlantNotes    `json:"notes,omitempty"`
+}
+
 type LoginMessage struct {
 	Header   MessageHeader     `json:"header,omitempty"`
 	Settings map[string]string `json:"settings,omitempty"`
