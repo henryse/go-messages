@@ -490,7 +490,7 @@ const (
 )
 
 type Plant struct {
-	ID        string `json:"id,omitempty"`
+	Id        string `json:"id,omitempty"`
 	Tag       string `json:"tag,omitempty"`
 	Strain    string `json:"strain,omitempty"`
 	Location  string `json:"location,omitempty"`
@@ -521,7 +521,7 @@ type TagsMessage struct {
 }
 
 type PlantNote struct {
-	ID         string    `json:"id,omitempty"`
+	Id         string    `json:"id,omitempty"`
 	Tag        string    `json:"tag,omitempty"`
 	Title      string    `json:"title,omitempty"`
 	Body       string    `json:"body,omitempty"`
