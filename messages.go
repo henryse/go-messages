@@ -491,14 +491,14 @@ const (
 
 type Plant struct {
 	Id        string `json:"id,omitempty"`
-	Tag       string `json:"tag,omitempty"`
-	Strain    string `json:"strain,omitempty"`
-	Location  string `json:"location,omitempty"`
-	Phase     string `json:"phase,omitempty"`
-	State     string `json:"state,omitempty"`
-	Group     string `json:"group,omitempty"`
-	GroupType string `json:"groupType,omitempty"`
-	Audit     bool   `json:"audit,omitempty"`
+	Tag       string `json:"tag"`
+	Strain    string `json:"strain"`
+	Location  string `json:"location"`
+	Phase     string `json:"phase"`
+	State     string `json:"state"`
+	Group     string `json:"group"`
+	GroupType string `json:"groupType"`
+	Audit     bool   `json:"audit"`
 }
 
 type Plants []Plant
