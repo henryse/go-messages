@@ -513,12 +513,21 @@ type PlantsMessage struct {
 	Plants Plants        `json:"plants,omitempty"`
 }
 
+type Tag struct {
+	Tag   string `json:"tag,omitempty"`
+	State string `json:"state,omitempty"`
+	Phase string `json:"phase,omitempty"`
+	Audit bool   `json:"audit,omitempty"`
+}
+
+type Tags []Tag
+
 type TagsMessage struct {
 	Header         MessageHeader `json:"header,omitempty"`
-	FloweringTags  []string      `json:"floweringTags,omitempty"`
-	VegetativeTags []string      `json:"vegetativeTags,omitempty"`
-	DestroyedTags  []string      `json:"destroyedTags,omitempty"`
-	HarvestedTags  []string      `json:"harvestedTags,omitempty"`
+	FloweringTags  Tags          `json:"floweringTags,omitempty"`
+	VegetativeTags Tags          `json:"vegetativeTags,omitempty"`
+	DestroyedTags  Tags          `json:"destroyedTags,omitempty"`
+	HarvestedTags  Tags          `json:"harvestedTags,omitempty"`
 }
 
 type PlantNote struct {
