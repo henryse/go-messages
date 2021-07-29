@@ -557,8 +557,9 @@ type LoginMessage struct {
 }
 
 type SettingsMessage struct {
-	Header   MessageHeader          `json:"header,omitempty"`
-	Settings map[string]interface{} `json:"settings,omitempty"`
+	Header MessageHeader     `json:"header,omitempty"`
+	Array  []string          `json:"array,omitempty"`
+	Map    map[string]string `json:"map,omitempty"`
 }
 
 //noinspection GoUnusedExportedFunction
