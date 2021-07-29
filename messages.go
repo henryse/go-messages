@@ -556,6 +556,11 @@ type LoginMessage struct {
 	Settings map[string]string `json:"settings,omitempty"`
 }
 
+type SettingsMessage struct {
+	Header   MessageHeader          `json:"header,omitempty"`
+	Settings map[string]interface{} `json:"settings,omitempty"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
