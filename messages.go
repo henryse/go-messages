@@ -499,7 +499,7 @@ type Plant struct {
 	Group     string `json:"group"`
 	GroupType string `json:"groupType"`
 	Audit     bool   `json:"audit"`
-	Bed       string `json:"bed,omitempty"`
+	Bed       string `json:"bed"`
 }
 
 type Plants []Plant
