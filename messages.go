@@ -515,10 +515,11 @@ type PlantsMessage struct {
 }
 
 type Tag struct {
-	Tag   string `json:"tag,omitempty"`
-	State string `json:"state,omitempty"`
-	Phase string `json:"phase,omitempty"`
-	Audit bool   `json:"audit,omitempty"`
+	Tag    string `json:"tag,omitempty"`
+	State  string `json:"state,omitempty"`
+	Phase  string `json:"phase,omitempty"`
+	Audit  bool   `json:"audit,omitempty"`
+	Strain string `json:"strain,omitempty"`
 }
 
 type Tags []Tag
