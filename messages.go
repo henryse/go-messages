@@ -463,6 +463,51 @@ type WeatherMessage struct {
 	Observations Observations  `json:"observations,omitempty"`
 }
 
+// ForecastPoints holds the JSON values from /points/<lat,lon>
+type ForecastPoints struct {
+	ID                          string `json:"@id"`
+	CWA                         string `json:"cwa"`
+	Office                      string `json:"forecastOffice"`
+	GridX                       int64  `json:"gridX"`
+	GridY                       int64  `json:"gridY"`
+	EndpointForecast            string `json:"forecast"`
+	EndpointForecastHourly      string `json:"forecastHourly"`
+	EndpointObservationStations string `json:"observationStations"`
+	EndpointForecastGridData    string `json:"forecastGridData"`
+	Timezone                    string `json:"timeZone"`
+	RadarStation                string `json:"radarStation"`
+}
+
+// WeatherForecast holds the JSON values from /gridpoints/<cwa>/<x,y>/forecast
+type WeatherForecast struct {
+	// capture data from the forecast
+	Updated   string `json:"updated"`
+	Units     string `json:"units"`
+	Elevation struct {
+		Value float64 `json:"value"`
+		Units string  `json:"unitCode"`
+	} `json:"elevation"`
+	Periods []struct {
+		ID              int32   `json:"number"`
+		Name            string  `json:"name"`
+		StartTime       string  `json:"startTime"`
+		EndTime         string  `json:"endTime"`
+		IsDaytime       bool    `json:"isDaytime"`
+		Temperature     float64 `json:"temperature"`
+		TemperatureUnit string  `json:"temperatureUnit"`
+		WindSpeed       string  `json:"windSpeed"`
+		WindDirection   string  `json:"windDirection"`
+		Summary         string  `json:"shortForecast"`
+		Details         string  `json:"detailedForecast"`
+	} `json:"periods"`
+	Point *ForecastPoints
+}
+
+type ForecastMessage struct {
+	Header   MessageHeader   `json:"header,omitempty"`
+	Forecast WeatherForecast `json:"forecast,omitempty"`
+}
+
 type DaylightDate struct {
 	Hours   int       `json:"hours,omitempty"`
 	Sunrise time.Time `json:"sunrise,omitempty"`
