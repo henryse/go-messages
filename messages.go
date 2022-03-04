@@ -508,6 +508,117 @@ type ForecastMessage struct {
 	Forecast WeatherForecast `json:"forecast,omitempty"`
 }
 
+// ForecastStations holds the JSON values from /points/<lat,lon>/stations
+type ForecastStations struct {
+	Stations []string `json:"observationStations"`
+}
+
+type ForecastStationsMessage struct {
+	Header   MessageHeader    `json:"header,omitempty"`
+	Stations ForecastStations `json:"stations,omitempty"`
+}
+
+// ForecastGridpoint holds the JSON values from /gridpoints/<cwa>/<x,y>
+// See https://weather-gov.github.io/api/gridpoints for information.
+type ForecastGridpoint struct {
+	// capture data from the forecast
+	Updated   string `json:"updateTime"`
+	Elevation struct {
+		Value float64 `json:"value"`
+		Units string  `json:"unitCode"`
+	} `json:"elevation"`
+	Weather struct {
+		Values []struct {
+			ValidTime string `json:"validTime"` // ISO 8601 time interval, e.g. 2019-07-04T18:00:00+00:00/PT3H
+			Value     []struct {
+				Coverage  string `json:"coverage"`
+				Weather   string `json:"weather"`
+				Intensity string `json:"intensity"`
+			} `json:"value"`
+		} `json:"values"`
+	} `json:"weather"`
+	Hazards struct {
+		Values []struct {
+			ValidTime string `json:"validTime"` // ISO 8601 time interval, e.g. 2019-07-04T18:00:00+00:00/PT3H
+			Value     []struct {
+				Phenomenon   string `json:"phenomenon"`
+				Significance string `json:"significance"`
+				EventNumber  int32  `json:"event_number"`
+			} `json:"value"`
+		} `json:"values"`
+	} `json:"hazards"`
+	Temperature                      ForecastGridpointTimeSeries `json:"temperature"`
+	Dewpoint                         ForecastGridpointTimeSeries `json:"dewpoint"`
+	MaxTemperature                   ForecastGridpointTimeSeries `json:"maxTemperature"`
+	MinTemperature                   ForecastGridpointTimeSeries `json:"minTemperature"`
+	RelativeHumidity                 ForecastGridpointTimeSeries `json:"relativeHumidity"`
+	ApparentTemperature              ForecastGridpointTimeSeries `json:"apparentTemperature"`
+	HeatIndex                        ForecastGridpointTimeSeries `json:"heatIndex"`
+	WindChill                        ForecastGridpointTimeSeries `json:"windChill"`
+	SkyCover                         ForecastGridpointTimeSeries `json:"skyCover"`
+	WindDirection                    ForecastGridpointTimeSeries `json:"windDirection"`
+	WindSpeed                        ForecastGridpointTimeSeries `json:"windSpeed"`
+	WindGust                         ForecastGridpointTimeSeries `json:"windGust"`
+	ProbabilityOfPrecipitation       ForecastGridpointTimeSeries `json:"probabilityOfPrecipitation"`
+	QuantitativePrecipitation        ForecastGridpointTimeSeries `json:"quantitativePrecipitation"`
+	IceAccumulation                  ForecastGridpointTimeSeries `json:"iceAccumulation"`
+	SnowfallAmount                   ForecastGridpointTimeSeries `json:"snowfallAmount"`
+	SnowLevel                        ForecastGridpointTimeSeries `json:"snowLevel"`
+	CeilingHeight                    ForecastGridpointTimeSeries `json:"ceilingHeight"`
+	Visibility                       ForecastGridpointTimeSeries `json:"visibility"`
+	TransportWindSpeed               ForecastGridpointTimeSeries `json:"transportWindSpeed"`
+	TransportWindDirection           ForecastGridpointTimeSeries `json:"transportWindDirection"`
+	MixingHeight                     ForecastGridpointTimeSeries `json:"mixingHeight"`
+	HainesIndex                      ForecastGridpointTimeSeries `json:"hainesIndex"`
+	LightningActivityLevel           ForecastGridpointTimeSeries `json:"lightningActivityLevel"`
+	TwentyFootWindSpeed              ForecastGridpointTimeSeries `json:"twentyFootWindSpeed"`
+	TwentyFootWindDirection          ForecastGridpointTimeSeries `json:"twentyFootWindDirection"`
+	WaveHeight                       ForecastGridpointTimeSeries `json:"waveHeight"`
+	WavePeriod                       ForecastGridpointTimeSeries `json:"wavePeriod"`
+	WaveDirection                    ForecastGridpointTimeSeries `json:"waveDirection"`
+	PrimarySwellHeight               ForecastGridpointTimeSeries `json:"primarySwellHeight"`
+	PrimarySwellDirection            ForecastGridpointTimeSeries `json:"primarySwellDirection"`
+	SecondarySwellHeight             ForecastGridpointTimeSeries `json:"secondarySwellHeight"`
+	SecondarySwellDirection          ForecastGridpointTimeSeries `json:"secondarySwellDirection"`
+	WavePeriod2                      ForecastGridpointTimeSeries `json:"wavePeriod2"`
+	WindWaveHeight                   ForecastGridpointTimeSeries `json:"windWaveHeight"`
+	DispersionIndex                  ForecastGridpointTimeSeries `json:"dispersionIndex"`
+	Pressure                         ForecastGridpointTimeSeries `json:"pressure"`
+	ProbabilityOfTropicalStormWinds  ForecastGridpointTimeSeries `json:"probabilityOfTropicalStormWinds"`
+	ProbabilityOfHurricaneWinds      ForecastGridpointTimeSeries `json:"probabilityOfHurricaneWinds"`
+	PotentialOf15mphWinds            ForecastGridpointTimeSeries `json:"potentialOf15mphWinds"`
+	PotentialOf25mphWinds            ForecastGridpointTimeSeries `json:"potentialOf25mphWinds"`
+	PotentialOf35mphWinds            ForecastGridpointTimeSeries `json:"potentialOf35mphWinds"`
+	PotentialOf45mphWinds            ForecastGridpointTimeSeries `json:"potentialOf45mphWinds"`
+	PotentialOf20mphWindGusts        ForecastGridpointTimeSeries `json:"potentialOf20mphWindGusts"`
+	PotentialOf30mphWindGusts        ForecastGridpointTimeSeries `json:"potentialOf30mphWindGusts"`
+	PotentialOf40mphWindGusts        ForecastGridpointTimeSeries `json:"potentialOf40mphWindGusts"`
+	PotentialOf50mphWindGusts        ForecastGridpointTimeSeries `json:"potentialOf50mphWindGusts"`
+	PotentialOf60mphWindGusts        ForecastGridpointTimeSeries `json:"potentialOf60mphWindGusts"`
+	GrasslandFireDangerIndex         ForecastGridpointTimeSeries `json:"grasslandFireDangerIndex"`
+	ProbabilityOfThunder             ForecastGridpointTimeSeries `json:"probabilityOfThunder"`
+	DavisStabilityIndex              ForecastGridpointTimeSeries `json:"davisStabilityIndex"`
+	AtmosphericDispersionIndex       ForecastGridpointTimeSeries `json:"atmosphericDispersionIndex"`
+	LowVisibilityOccurrenceRiskIndex ForecastGridpointTimeSeries `json:"lowVisibilityOccurrenceRiskIndex"`
+	Stability                        ForecastGridpointTimeSeries `json:"stability"`
+	RedFlagThreatIndex               ForecastGridpointTimeSeries `json:"redFlagThreatIndex"`
+	Point                            ForecastPoints
+}
+
+// ForecastGridpointTimeSeries holds a series of data from a gridpoint forecast
+type ForecastGridpointTimeSeries struct {
+	Uom    string `json:"uom"` // Unit of Measure
+	Values []struct {
+		ValidTime string  `json:"validTime"` // ISO 8601 time interval, e.g. 2019-07-04T18:00:00+00:00/PT3H
+		Value     float64 `json:"value"`
+	} `json:"values"`
+}
+
+type ForecastGridpointMessage struct {
+	Header   MessageHeader     `json:"header,omitempty"`
+	Forecast ForecastGridpoint `json:"grid_forecast,omitempty"`
+}
+
 type DaylightDate struct {
 	Hours   int       `json:"hours,omitempty"`
 	Sunrise time.Time `json:"sunrise,omitempty"`
