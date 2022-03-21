@@ -113,8 +113,10 @@ type TextMessage struct {
 }
 
 type MotionMessage struct {
-	Header MessageHeader `json:"header,omitempty"`
-	Device string        `json:"device,omitempty"`
+	Header  MessageHeader `json:"header,omitempty"`
+	Device  string        `json:"device,omitempty"`
+	Channel string        `json:"channel,omitempty"`
+	TimeMs  uint          `json:"time_ms,omitempty"`
 }
 
 type TemperatureMessage struct {
