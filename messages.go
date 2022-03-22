@@ -117,6 +117,7 @@ type MotionMessage struct {
 	Device  string        `json:"device,omitempty"`
 	Channel string        `json:"channel,omitempty"`
 	TimeMs  int64         `json:"time_ms,omitempty"`
+	Source  string        `json:"source,omitempty"`
 }
 
 type TemperatureMessage struct {
