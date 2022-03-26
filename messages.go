@@ -63,6 +63,10 @@ func GetHostName() string {
 	return host
 }
 
+type EmptyMessage struct {
+	Header MessageHeader `json:"header,omitempty"`
+}
+
 type AlertSeverity int
 
 //goland:noinspection GoUnusedConst
