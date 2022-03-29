@@ -116,12 +116,35 @@ type TextMessage struct {
 	Texts  Texts         `json:"texts,omitempty"`
 }
 
+type SourceType = int
+
+//goland:noinspection GoUnusedConst
+const (
+	DockerID  SourceType = 0 // Docker container ID
+	HostName  SourceType = 1 // Host name
+	IPAddress SourceType = 2 // IP Address
+)
+
+type Source struct {
+	Type  SourceType `json:"type"`
+	Value string     `json:"value,omitempty"`
+}
+
+type DeviceType = string
+
+//goland:noinspection GoUnusedConst
+const (
+	CameraDevice DeviceType = "camera" // Camera
+	SensorDevice DeviceType = "sensor" // Pressure Sensor
+	MotionDevice DeviceType = "motion" // Motion Sensor
+)
+
 type MotionMessage struct {
 	Header  MessageHeader `json:"header,omitempty"`
-	Device  string        `json:"device,omitempty"`
+	Device  DeviceType    `json:"device,omitempty"`
 	Channel string        `json:"channel,omitempty"`
 	TimeMs  int64         `json:"time_ms,omitempty"`
-	Source  string        `json:"source,omitempty"`
+	Source  Source        `json:"source,omitempty"`
 }
 
 type TemperatureMessage struct {
