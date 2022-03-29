@@ -120,11 +120,10 @@ type SourceType = int
 
 //goland:noinspection GoUnusedConst
 const (
-	NullSource SourceType = 0 // Invalid Source ID
-	DockerID   SourceType = 1 // Docker container ID
-	HostName   SourceType = 2 // Host name
-	IPAddress  SourceType = 3 // IP Address
-
+	NullSource      SourceType = 0 // Invalid Source ID
+	DockerSource    SourceType = 1 // Docker container ID
+	HostNameSource  SourceType = 2 // Host name
+	IPAddressSource SourceType = 3 // IP Address
 )
 
 type Source struct {
