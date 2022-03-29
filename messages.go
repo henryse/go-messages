@@ -116,20 +116,20 @@ type TextMessage struct {
 	Texts  Texts         `json:"texts,omitempty"`
 }
 
-type SourceType = int
+type NetworkSourceType = string
 
 //goland:noinspection GoUnusedConst
 const (
-	NullSource      SourceType = 0 // Invalid Source ID
-	DockerSource    SourceType = 1 // Docker container ID
-	HostNameSource  SourceType = 2 // Host name
-	IPAddressSource SourceType = 3 // IP Address
+	NullSource      NetworkSourceType = ""          // Invalid Source ID
+	DockerSource    NetworkSourceType = "docker"    // Docker container ID
+	HostNameSource  NetworkSourceType = "hostname"  // Host name
+	IPAddressSource NetworkSourceType = "ipaddress" // IP Address
 )
 
 type Source struct {
-	Type  SourceType `json:"type"`
-	Value string     `json:"value,omitempty"`
-	Name  string     `json:"name,omitempty"`
+	Type  NetworkSourceType `json:"type"`
+	Value string            `json:"value,omitempty"`
+	Name  string            `json:"name,omitempty"`
 }
 
 type DeviceType = string
