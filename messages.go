@@ -129,6 +129,7 @@ const (
 type Source struct {
 	Type  SourceType `json:"type"`
 	Value string     `json:"value,omitempty"`
+	Name  string     `json:"name,omitempty"`
 }
 
 type DeviceType = string
