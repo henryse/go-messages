@@ -425,15 +425,17 @@ type KasaSetMessage struct {
 }
 
 type Service struct {
-	ID       string                 `json:"id,omitempty"`
-	TTL      time.Duration          `json:"ttl,omitempty"`
-	TTLStamp time.Time              `json:"ttl_stamp,omitempty"`
-	Name     string                 `json:"name,omitempty"`
-	Attrs    map[string]string      `json:"attrs,omitempty"`
-	Status   string                 `json:"status,omitempty"`
-	Hostname string                 `json:"hostname,omitempty"`
-	HostIP   string                 `json:"host_ip,omitempty"`
-	Ports    map[string]ServicePort `json:"origin,omitempty"`
+	ID           string                 `json:"id,omitempty"`
+	TTL          time.Duration          `json:"ttl,omitempty"`
+	TTLStamp     time.Time              `json:"ttl_stamp,omitempty"`
+	Name         string                 `json:"name,omitempty"`
+	Attrs        map[string]string      `json:"attrs,omitempty"`
+	Status       string                 `json:"status,omitempty"`
+	Hostname     string                 `json:"hostname,omitempty"`
+	HostIP       string                 `json:"host_ip,omitempty"`
+	Ports        map[string]ServicePort `json:"origin,omitempty"`
+	RestartCount int                    `json:"restart_count,omitempty"`
+	Platform     string                 `json:"platform,omitempty"`
 }
 
 type ServicePort struct {
