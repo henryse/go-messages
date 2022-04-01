@@ -424,18 +424,40 @@ type KasaSetMessage struct {
 	State  bool          `json:"state,omitempty"`
 }
 
+type ServiceMemory struct {
+	MaxUsage          uint64 `json:"max_usage,omitempty"`
+	Usage             uint64 `json:"usage,omitempty"`
+	Limit             uint64 `json:"limit,omitempty"`
+	Commit            uint64 `json:"commitbytes,omitempty"`
+	CommitPeak        uint64 `json:"commitpeakbytes,omitempty"`
+	PrivateWorkingSet uint64 `json:"privateworkingset,omitempty"`
+}
+
+type ServiceNetworkStats struct {
+	RxDropped uint64 `json:"rx_dropped,omitempty"`
+	RxBytes   uint64 `json:"rx_bytes,omitempty"`
+	RxErrors  uint64 `json:"rx_errors,omitempty"`
+	TxPackets uint64 `json:"tx_packets,omitempty"`
+	TxDropped uint64 `json:"tx_dropped,omitempty"`
+	RxPackets uint64 `json:"rx_packets,omitempty"`
+	TxErrors  uint64 `json:"tx_errors,omitempty"`
+	TxBytes   uint64 `json:"tx_bytes,omitempty"`
+}
+
 type Service struct {
-	ID           string                 `json:"id,omitempty"`
-	TTL          time.Duration          `json:"ttl,omitempty"`
-	TTLStamp     time.Time              `json:"ttl_stamp,omitempty"`
-	Name         string                 `json:"name,omitempty"`
-	Attrs        map[string]string      `json:"attrs,omitempty"`
-	Status       string                 `json:"status,omitempty"`
-	Hostname     string                 `json:"hostname,omitempty"`
-	HostIP       string                 `json:"host_ip,omitempty"`
-	Ports        map[string]ServicePort `json:"origin,omitempty"`
-	RestartCount int                    `json:"restart_count,omitempty"`
-	Platform     string                 `json:"platform,omitempty"`
+	ID           string                         `json:"id,omitempty"`
+	TTL          time.Duration                  `json:"ttl,omitempty"`
+	TTLStamp     time.Time                      `json:"ttl_stamp,omitempty"`
+	Name         string                         `json:"name,omitempty"`
+	Attrs        map[string]string              `json:"attrs,omitempty"`
+	Status       string                         `json:"status,omitempty"`
+	Hostname     string                         `json:"hostname,omitempty"`
+	HostIP       string                         `json:"host_ip,omitempty"`
+	Ports        map[string]ServicePort         `json:"origin,omitempty"`
+	RestartCount int                            `json:"restart_count,omitempty"`
+	Platform     string                         `json:"platform,omitempty"`
+	Memory       ServiceMemory                  `json:"memory,omitempty"`
+	Networks     map[string]ServiceNetworkStats `json:"networks,omitempty"`
 }
 
 type ServicePort struct {
