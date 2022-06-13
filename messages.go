@@ -733,6 +733,7 @@ type Tag struct {
 	Phase  string `json:"phase,omitempty"`
 	Audit  bool   `json:"audit,omitempty"`
 	Strain string `json:"strain,omitempty"`
+	Bed    string `json:"bed,omitempty"`
 }
 
 type Tags []Tag
