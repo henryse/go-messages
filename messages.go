@@ -713,7 +713,10 @@ type Plant struct {
 	GroupType  string    `json:"groupType"`
 	Audit      bool      `json:"audit"`
 	Bed        string    `json:"bed"`
-	UpdateDate time.Time `json:"updateDate,omitempty"`
+	GroupDate  time.Time `json:"groupDate"`
+	CrateDate  time.Time `json:"createDate"`
+	UpdateDate time.Time `json:"updateDate"`
+	SyncDate   time.Time `json:"syncDate"`
 }
 
 type Plants []Plant
@@ -729,12 +732,11 @@ type PlantsMessage struct {
 }
 
 type Tag struct {
-	Tag        string    `json:"tag,omitempty"`
-	State      string    `json:"state,omitempty"`
-	Phase      string    `json:"phase,omitempty"`
-	Audit      bool      `json:"audit,omitempty"`
-	Strain     string    `json:"strain,omitempty"`
-	UpdateDate time.Time `json:"updateDate,omitempty"`
+	Tag    string `json:"tag,omitempty"`
+	State  string `json:"state,omitempty"`
+	Phase  string `json:"phase,omitempty"`
+	Audit  bool   `json:"audit,omitempty"`
+	Strain string `json:"strain,omitempty"`
 }
 
 type Tags []Tag
