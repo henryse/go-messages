@@ -776,6 +776,140 @@ type BedsMessage struct {
 	Beds   map[string][]string `json:"beds,omitempty"`
 }
 
+type PurpleAirData struct {
+	APIVersion    string `json:"api_version"`
+	TimeStamp     int    `json:"time_stamp"`
+	DataTimeStamp int    `json:"data_time_stamp"`
+	Sensor        struct {
+		SensorIndex        int     `json:"sensor_index"`
+		LastModified       int     `json:"last_modified"`
+		DateCreated        int     `json:"date_created"`
+		LastSeen           int     `json:"last_seen"`
+		Private            int     `json:"private"`
+		IsOwner            int     `json:"is_owner"`
+		Name               string  `json:"name"`
+		Icon               int     `json:"icon"`
+		LocationType       int     `json:"location_type"`
+		Model              string  `json:"model"`
+		Hardware           string  `json:"hardware"`
+		LedBrightness      int     `json:"led_brightness"`
+		FirmwareVersion    string  `json:"firmware_version"`
+		Rssi               int     `json:"rssi"`
+		Uptime             int     `json:"uptime"`
+		PaLatency          int     `json:"pa_latency"`
+		Memory             int     `json:"memory"`
+		PositionRating     int     `json:"position_rating"`
+		Latitude           float64 `json:"latitude"`
+		Longitude          float64 `json:"longitude"`
+		Altitude           int     `json:"altitude"`
+		ChannelState       int     `json:"channel_state"`
+		ChannelFlags       int     `json:"channel_flags"`
+		ChannelFlagsManual int     `json:"channel_flags_manual"`
+		ChannelFlagsAuto   int     `json:"channel_flags_auto"`
+		Confidence         int     `json:"confidence"`
+		ConfidenceAuto     int     `json:"confidence_auto"`
+		ConfidenceManual   int     `json:"confidence_manual"`
+		Humidity           int     `json:"humidity"`
+		HumidityA          int     `json:"humidity_a"`
+		Temperature        int     `json:"temperature"`
+		TemperatureA       int     `json:"temperature_a"`
+		Pressure           float64 `json:"pressure"`
+		PressureA          float64 `json:"pressure_a"`
+		AnalogInput        float64 `json:"analog_input"`
+		Pm10               float64 `json:"pm1.0"`
+		Pm10A              float64 `json:"pm1.0_a"`
+		Pm10B              float64 `json:"pm1.0_b"`
+		Pm25               float64 `json:"pm2.5"`
+		Pm25A              float64 `json:"pm2.5_a"`
+		Pm25B              float64 `json:"pm2.5_b"`
+		Pm25Alt            float64 `json:"pm2.5_alt"`
+		Pm25AltA           float64 `json:"pm2.5_alt_a"`
+		Pm25AltB           float64 `json:"pm2.5_alt_b"`
+		Pm100              float64 `json:"pm10.0"`
+		Pm100A             float64 `json:"pm10.0_a"`
+		Pm100B             float64 `json:"pm10.0_b"`
+		Zero3UmCount       int     `json:"0.3_um_count"`
+		Zero3UmCountA      int     `json:"0.3_um_count_a"`
+		Zero3UmCountB      int     `json:"0.3_um_count_b"`
+		Zero5UmCount       int     `json:"0.5_um_count"`
+		Zero5UmCountA      int     `json:"0.5_um_count_a"`
+		Zero5UmCountB      int     `json:"0.5_um_count_b"`
+		One0UmCount        int     `json:"1.0_um_count"`
+		One0UmCountA       int     `json:"1.0_um_count_a"`
+		One0UmCountB       int     `json:"1.0_um_count_b"`
+		Two5UmCount        int     `json:"2.5_um_count"`
+		Two5UmCountA       int     `json:"2.5_um_count_a"`
+		Two5UmCountB       int     `json:"2.5_um_count_b"`
+		Five0UmCount       int     `json:"5.0_um_count"`
+		Five0UmCountA      int     `json:"5.0_um_count_a"`
+		Five0UmCountB      int     `json:"5.0_um_count_b"`
+		One00UmCount       int     `json:"10.0_um_count"`
+		One00UmCountA      int     `json:"10.0_um_count_a"`
+		One00UmCountB      int     `json:"10.0_um_count_b"`
+		Pm10Cf1            float64 `json:"pm1.0_cf_1"`
+		Pm10Cf1A           float64 `json:"pm1.0_cf_1_a"`
+		Pm10Cf1B           float64 `json:"pm1.0_cf_1_b"`
+		Pm10Atm            float64 `json:"pm1.0_atm"`
+		Pm10AtmA           float64 `json:"pm1.0_atm_a"`
+		Pm10AtmB           float64 `json:"pm1.0_atm_b"`
+		Pm25Atm            float64 `json:"pm2.5_atm"`
+		Pm25AtmA           float64 `json:"pm2.5_atm_a"`
+		Pm25AtmB           float64 `json:"pm2.5_atm_b"`
+		Pm25Cf1            float64 `json:"pm2.5_cf_1"`
+		Pm25Cf1A           float64 `json:"pm2.5_cf_1_a"`
+		Pm25Cf1B           float64 `json:"pm2.5_cf_1_b"`
+		Pm100Atm           float64 `json:"pm10.0_atm"`
+		Pm100AtmA          float64 `json:"pm10.0_atm_a"`
+		Pm100AtmB          float64 `json:"pm10.0_atm_b"`
+		Pm100Cf1           float64 `json:"pm10.0_cf_1"`
+		Pm100Cf1A          float64 `json:"pm10.0_cf_1_a"`
+		Pm100Cf1B          float64 `json:"pm10.0_cf_1_b"`
+		PrimaryIDA         int     `json:"primary_id_a"`
+		PrimaryKeyA        string  `json:"primary_key_a"`
+		PrimaryIDB         int     `json:"primary_id_b"`
+		PrimaryKeyB        string  `json:"primary_key_b"`
+		SecondaryIDA       int     `json:"secondary_id_a"`
+		SecondaryKeyA      string  `json:"secondary_key_a"`
+		SecondaryIDB       int     `json:"secondary_id_b"`
+		SecondaryKeyB      string  `json:"secondary_key_b"`
+		Stats              struct {
+			Pm25         float64 `json:"pm2.5"`
+			Pm2510Minute float64 `json:"pm2.5_10minute"`
+			Pm2530Minute float64 `json:"pm2.5_30minute"`
+			Pm2560Minute float64 `json:"pm2.5_60minute"`
+			Pm256Hour    float64 `json:"pm2.5_6hour"`
+			Pm2524Hour   float64 `json:"pm2.5_24hour"`
+			Pm251Week    float64 `json:"pm2.5_1week"`
+			TimeStamp    int     `json:"time_stamp"`
+		} `json:"stats"`
+		StatsA struct {
+			Pm25         float64 `json:"pm2.5"`
+			Pm2510Minute float64 `json:"pm2.5_10minute"`
+			Pm2530Minute float64 `json:"pm2.5_30minute"`
+			Pm2560Minute float64 `json:"pm2.5_60minute"`
+			Pm256Hour    float64 `json:"pm2.5_6hour"`
+			Pm2524Hour   float64 `json:"pm2.5_24hour"`
+			Pm251Week    float64 `json:"pm2.5_1week"`
+			TimeStamp    int     `json:"time_stamp"`
+		} `json:"stats_a"`
+		StatsB struct {
+			Pm25         float64 `json:"pm2.5"`
+			Pm2510Minute float64 `json:"pm2.5_10minute"`
+			Pm2530Minute float64 `json:"pm2.5_30minute"`
+			Pm2560Minute float64 `json:"pm2.5_60minute"`
+			Pm256Hour    float64 `json:"pm2.5_6hour"`
+			Pm2524Hour   float64 `json:"pm2.5_24hour"`
+			Pm251Week    float64 `json:"pm2.5_1week"`
+			TimeStamp    int     `json:"time_stamp"`
+		} `json:"stats_b"`
+	} `json:"sensor"`
+}
+
+type PurpleAirMessage struct {
+	Header MessageHeader `json:"header,omitempty"`
+	Data   PurpleAirData `json:"data,omitempty"`
+}
+
 //noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
