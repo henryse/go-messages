@@ -703,16 +703,20 @@ const (
 )
 
 type Plant struct {
-	Id        string `json:"id,omitempty"`
-	Tag       string `json:"tag"`
-	Strain    string `json:"strain"`
-	Location  string `json:"location"`
-	Phase     string `json:"phase"`
-	State     string `json:"state"`
-	Group     string `json:"group"`
-	GroupType string `json:"groupType"`
-	Audit     bool   `json:"audit"`
-	Bed       string `json:"bed"`
+	Id         string    `json:"id,omitempty"`
+	Tag        string    `json:"tag"`
+	Strain     string    `json:"strain"`
+	Location   string    `json:"location"`
+	Phase      string    `json:"phase"`
+	State      string    `json:"state"`
+	Group      string    `json:"group"`
+	GroupType  string    `json:"groupType"`
+	Audit      bool      `json:"audit"`
+	Bed        string    `json:"bed"`
+	GroupDate  time.Time `json:"groupDate"`
+	CrateDate  time.Time `json:"createDate"`
+	UpdateDate time.Time `json:"updateDate"`
+	SyncDate   time.Time `json:"syncDate"`
 }
 
 type Plants []Plant
