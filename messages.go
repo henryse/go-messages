@@ -222,7 +222,7 @@ func (t *ThrottleEntry) Duration(minTime time.Duration, maxTime time.Duration) t
 const maxInt64 = float64(math.MaxInt64 - 512)
 
 // ForAttempt returns the duration for a specific attempt. This is useful if
-// you have a large number of independent ThrottleEntry, but don't want use
+// you have a large number of independent ThrottleEntry, but you don't want to use
 // unnecessary memory storing the back off parameters per back off. The first
 // attempt should be 0.
 //
@@ -251,7 +251,7 @@ func (t *ThrottleEntry) ForAttempt(attempt float64, minTime time.Duration, maxTi
 	if t.Jitter {
 		durationFloat = rand.Float64()*(durationFloat-minFloat) + minFloat
 	}
-	//ensure float64 wont overflow int64
+	//ensure float64 won't overflow int64
 	if durationFloat > maxInt64 {
 		return max
 	}
