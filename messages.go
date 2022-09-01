@@ -127,9 +127,10 @@ const (
 )
 
 type Source struct {
-	Type  NetworkSourceType `json:"type"`
-	Value string            `json:"value,omitempty"`
-	Name  string            `json:"name,omitempty"`
+	Type        NetworkSourceType `json:"type"`
+	Value       string            `json:"value,omitempty"`
+	Name        string            `json:"name,omitempty"`
+	Application string            `json:"app,omitempty"`
 }
 
 type DeviceType = string
