@@ -28,7 +28,6 @@ package messages
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"math"
 	"math/rand"
@@ -156,6 +155,7 @@ type TemperatureMessage struct {
 	Humidity   float32       `json:"humidity,omitempty"`
 	Fahrenheit float32       `json:"fahrenheit,omitempty"`
 	Time       time.Time     `json:"time,omitempty"`
+	DeviceName string        `json:"device_name,omitempty"`
 }
 
 type SuccessMessage struct {
@@ -203,7 +203,6 @@ type AlarmSensorMessage struct {
 // ThrottleEntry is a time.Duration counter, starting at Min. After every call to
 // the Duration method the current timing is multiplied by Factor, but it
 // never exceeds Max.
-//
 type ThrottleEntry struct {
 	Count  uint64        `json:"count,omitempty"`
 	Factor float64       `json:"factor,omitempty"`
@@ -226,7 +225,6 @@ const maxInt64 = float64(math.MaxInt64 - 512)
 // you have a large number of independent ThrottleEntry, but you don't want to use
 // unnecessary memory storing the back off parameters per back off. The first
 // attempt should be 0.
-//
 func (t *ThrottleEntry) ForAttempt(attempt float64, minTime time.Duration, maxTime time.Duration) time.Duration {
 	// Zero-values are nonsensical, so we use
 	// them to apply defaults
@@ -311,7 +309,7 @@ const (
 	UNDEFINED SystemStatus = "UNDEFINED"
 )
 
-//noinspection GoUnusedExportedFunction
+// noinspection GoUnusedExportedFunction
 func ParseSystemState(state string) SystemStatus {
 	state = strings.ToUpper(state)
 	switch state {
@@ -337,7 +335,7 @@ const (
 	UNKNOWN DeviceState = "UNKNOWN"
 )
 
-//noinspection GoUnusedExportedFunction
+// noinspection GoUnusedExportedFunction
 func ParseDeviceState(state string) DeviceState {
 	state = strings.ToUpper(state)
 	switch state {
@@ -469,7 +467,7 @@ type ServicePort struct {
 	PortType    string `json:"port_type,omitempty"`
 }
 
-//noinspection GoUnusedConst
+// noinspection GoUnusedConst
 const (
 	ServiceEventStart    = "start"
 	ServiceEventStop     = "stop"
@@ -915,13 +913,13 @@ type PurpleAirMessage struct {
 	Data   PurpleAirData `json:"data,omitempty"`
 }
 
-//noinspection GoUnusedExportedFunction
+// noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
 	// Do we have a build version?
 	//
 	var build BuildVersion
-	buildBytes, err := ioutil.ReadFile("/opt/build_version.json")
+	buildBytes, err := os.ReadFile("/opt/build_version.json")
 	if err == nil {
 		err = json.Unmarshal(buildBytes, &build)
 		log.Println("[INFO] Reading version: ", string(buildBytes))
