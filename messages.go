@@ -139,6 +139,7 @@ const (
 	CameraDevice DeviceType = "camera" // Camera
 	SensorDevice DeviceType = "sensor" // Pressure Sensor
 	MotionDevice DeviceType = "motion" // Motion Sensor
+	SolarDevice  DeviceType = "solar"  // Solar System
 )
 
 type MotionMessage struct {
@@ -161,6 +162,15 @@ type TemperatureMessage struct {
 type SuccessMessage struct {
 	Header  MessageHeader `json:"header,omitempty"`
 	Message string        `json:"message,omitempty"`
+}
+
+type ServiceStats map[string]string
+
+type ServiceStatsMessage struct {
+	Header     MessageHeader `json:"header,omitempty"`
+	Type       DeviceType    `json:"device_type,omitempty"`
+	DeviceName string        `json:"device_name,omitempty"`
+	Stats      ServiceStats  `json:"stats,omitempty"`
 }
 
 type Regions []string
