@@ -156,7 +156,6 @@ type TemperatureMessage struct {
 	Humidity   float32       `json:"humidity,omitempty"`
 	Fahrenheit float32       `json:"fahrenheit,omitempty"`
 	Time       time.Time     `json:"time,omitempty"`
-	DeviceName string        `json:"device_name,omitempty"`
 }
 
 type SuccessMessage struct {
