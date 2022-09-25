@@ -933,18 +933,23 @@ const (
 	BuildConstruct BuildRequestType = "construct"
 )
 
+type BuildHeader struct {
+	BuildId    string `json:"buildId,omitempty"`
+	RequestId  string `json:"requestId,omitempty"`
+	GitStashId string `json:"gitStashId,omitempty"`
+}
+
 type BuildRequestMessage struct {
-	Header    MessageHeader    `json:"header,omitempty"`
-	Type      BuildRequestType `json:"type,omitempty"`
-	RequestId string           `json:"requestId,omitempty"`
+	Header MessageHeader    `json:"header,omitempty"`
+	Build  BuildHeader      `json:"build,omitempty"`
+	Type   BuildRequestType `json:"type,omitempty"`
 }
 
 type BuildResponseMessage struct {
 	Header       MessageHeader    `json:"header,omitempty"`
+	Build        BuildHeader      `json:"build,omitempty"`
 	Type         BuildRequestType `json:"type,omitempty"`
-	RequestId    string           `json:"requestId,omitempty"`
 	Architecture string           `json:"architecture,omitempty"`
-	ErrorCode    int              `json:"errorCode,omitempty"`
 	Body         string           `json:"body,omitempty"`
 }
 
