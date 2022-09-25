@@ -922,6 +922,32 @@ type PurpleAirMessage struct {
 	Data   PurpleAirData `json:"data,omitempty"`
 }
 
+type BuildRequestType string
+
+//goland:noinspection GoUnusedConst
+const (
+	BuildQuery     BuildRequestType = "query"
+	BuildSync      BuildRequestType = "sync"
+	BuildMake      BuildRequestType = "make"
+	BuildPush      BuildRequestType = "push"
+	BuildConstruct BuildRequestType = "construct"
+)
+
+type BuildRequestMessage struct {
+	Header    MessageHeader    `json:"header,omitempty"`
+	Type      BuildRequestType `json:"type,omitempty"`
+	RequestId string           `json:"requestId,omitempty"`
+}
+
+type BuildResponseMessage struct {
+	Header       MessageHeader    `json:"header,omitempty"`
+	Type         BuildRequestType `json:"type,omitempty"`
+	RequestId    string           `json:"requestId,omitempty"`
+	Architecture string           `json:"architecture,omitempty"`
+	ErrorCode    int              `json:"errorCode,omitempty"`
+	Body         string           `json:"body,omitempty"`
+}
+
 // noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
