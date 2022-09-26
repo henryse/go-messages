@@ -934,9 +934,9 @@ const (
 )
 
 type BuildHeader struct {
-	BuildId    string `json:"buildId,omitempty"`
-	RequestId  string `json:"requestId,omitempty"`
-	GitStashId string `json:"gitStashId,omitempty"`
+	BuildId       string `json:"buildId,omitempty"`
+	CorrelationId string `json:"correlationId,omitempty"`
+	GitStashId    string `json:"gitStashId,omitempty"`
 }
 
 type BuildRequestMessage struct {
