@@ -945,11 +945,11 @@ type BuildRequestMessage struct {
 }
 
 type BuildResponseMessage struct {
-	Header       MessageHeader    `json:"header,omitempty"`
-	Build        BuildHeader      `json:"build,omitempty"`
-	Type         BuildRequestType `json:"type,omitempty"`
-	Architecture string           `json:"architecture,omitempty"`
-	Body         string           `json:"body,omitempty"`
+	Header   MessageHeader    `json:"header,omitempty"`
+	Build    BuildHeader      `json:"build,omitempty"`
+	Type     BuildRequestType `json:"type,omitempty"`
+	Platform string           `json:"platform,omitempty"`
+	Body     string           `json:"body,omitempty"`
 }
 
 // noinspection GoUnusedExportedFunction
