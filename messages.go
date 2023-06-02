@@ -468,6 +468,8 @@ type Service struct {
 	Networks     map[string]ServiceNetworkStats `json:"networks,omitempty"`
 }
 
+type Services []Service
+
 type ServicePort struct {
 	HostPort    string `json:"host_port,omitempty"`
 	HostIP      string `json:"host_ip,omitempty"`
@@ -488,6 +490,11 @@ type ServiceMessage struct {
 	Header       MessageHeader `json:"header,omitempty"`
 	ServiceEvent string        `json:"event,omitempty"`
 	Service      Service       `json:"service,omitempty"`
+}
+
+type ServiceListMessage struct {
+	Header   MessageHeader `json:"header,omitempty"`
+	Services Services      `json:"services,omitempty"`
 }
 
 type Observation struct {
