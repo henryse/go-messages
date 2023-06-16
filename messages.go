@@ -961,6 +961,11 @@ type BuildResponseMessage struct {
 	Body     string           `json:"body,omitempty"`
 }
 
+type StatusMessage struct {
+	Header MessageHeader   `json:"header,omitempty"`
+	States map[string]bool `json:"states,omitempty"`
+}
+
 // noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
