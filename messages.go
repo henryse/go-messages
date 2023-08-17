@@ -966,6 +966,26 @@ type StatusMessage struct {
 	States map[string]bool `json:"states,omitempty"`
 }
 
+type BleAdvertisementPayload struct {
+	LocalName        string            `json:"localName,omitempty"`
+	Bytes            []byte            `json:"bytes,omitempty"`
+	ManufacturerData map[uint16][]byte `json:"manufacturerData,omitempty"`
+}
+
+type BleDevice struct {
+	Address       string                  `json:"address,omitempty"`
+	RSSI          int16                   `json:"rssi,omitempty"`
+	Name          string                  `json:"name,omitempty"`
+	Advertisement BleAdvertisementPayload `json:"advertisement,omitempty"`
+}
+
+type BleDevices map[string]BleDevice
+
+type BleAdvertisementMessage struct {
+	Header  MessageHeader `json:"header,omitempty"`
+	Devices BleDevices    `json:"devices,omitempty"`
+}
+
 // noinspection GoUnusedExportedFunction
 func CreateHeader(status int, location string) MessageHeader {
 
