@@ -979,7 +979,9 @@ type BleDevice struct {
 	Advertisement BleAdvertisementPayload `json:"advertisement,omitempty"`
 }
 
-type BleDevices map[string]BleDevice
+type BleDevicesMap map[string]BleDevice
+
+type BleDevices []BleDevice
 
 type BleAdvertisementMessage struct {
 	Header  MessageHeader `json:"header,omitempty"`
